@@ -18,8 +18,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginView.loginButton.addTarget(self, action: #selector(touchUpLoginButton), for: .touchUpInside)
+        setButtons()
     }
+    
+    func setButtons() {
+        loginView.loginButton.addTarget(self, action: #selector(touchUpLoginButton), for: .touchUpInside)
+        loginView.registerButton.addTarget(self, action: #selector(touchUpRegisterButton), for: .touchUpInside)
+    }
+}
+
+//MARK: - 버튼 addTarget
+extension LoginViewController {
     
     //로그인버튼 클릭
     @objc func touchUpLoginButton(_ sender: UIButton) {
@@ -28,5 +37,10 @@ class LoginViewController: UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
 
     }
+    
+    //회원가입버튼 클릭
+    @objc func touchUpRegisterButton(_ sender: UIButton) {
+        let registerViewController = RegisterViewController()
+        self.navigationController?.pushViewController(registerViewController, animated: true)
+    }
 }
-
