@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
     func setButtons() {
         loginView.loginButton.addTarget(self, action: #selector(touchUpLoginButton), for: .touchUpInside)
         loginView.registerButton.addTarget(self, action: #selector(touchUpRegisterButton), for: .touchUpInside)
+        loginView.forgetPasswordButton.addTarget(self, action: #selector(touchUpForgetPasswordButton), for: .touchUpInside)
     }
 }
 
@@ -42,5 +43,12 @@ extension LoginViewController {
     @objc func touchUpRegisterButton(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
         self.navigationController?.pushViewController(registerViewController, animated: true)
+    }
+    
+    @objc func touchUpForgetPasswordButton(_ sender: UIButton) {
+
+        //SceneDelegate changeRootView 호출
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(ForgetPasswordViewController(), animated: true)
+
     }
 }
