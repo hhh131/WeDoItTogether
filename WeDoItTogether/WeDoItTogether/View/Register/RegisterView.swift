@@ -114,7 +114,7 @@ class RegisterView: UIView {
         label.text = "조합이 이상합니다. 나중에 숨길 예정"
         label.textColor = .systemRed
         label.font = .systemFont(ofSize: 15, weight: .light)
-//        label.isHidden = true
+        label.isHidden = true
         
         return label
     }()
@@ -141,7 +141,7 @@ class RegisterView: UIView {
         label.text = "비밀번호가 일치하지 않습니다. 나중에 숨길 예정"
         label.textColor = .systemRed
         label.font = .systemFont(ofSize: 15, weight: .light)
-//        label.isHidden = true
+        label.isHidden = true
         
         return label
     }()
