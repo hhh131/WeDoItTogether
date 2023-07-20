@@ -8,28 +8,32 @@
 import Foundation
 import UIKit
 
-class PasswordFindView: UIView {
+class ForgetPasswordView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호를 잊어버리셨나요?"
         label.font = UIFont.systemFont(ofSize: 22)
         label.textColor = UIColor.black
+        
         return label
     }()
     
     lazy var contentLabel: UILabel = {
         let label = UILabel()
-        label.text = "걱정마세요, 저 애플펀치가 찾아드립니다.\n이메일 주소를 입력하시면 임시 비밀번호를 발급해드립니다."
+        label.text = "걱정마세요, 저 애플펀치가 찾아드립니다. 이메일 주소를 입력하시면 임시 비밀번호를 발급해드립니다."
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = UIColor.gray
+        label.textColor = .systemGray
+        
         return label
     }()
     
     lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일 주소"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 15)
         
         return label
     }()
@@ -37,6 +41,7 @@ class PasswordFindView: UIView {
     lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "ex@email.com"
+        textField.backgroundColor = .gray
         textField.borderStyle = .roundedRect
         
         return textField
@@ -47,7 +52,6 @@ class PasswordFindView: UIView {
         button.setTitle("임시 비밀번호 받기", for: .normal)
         
         return button
-        
     }()
     
     override init(frame: CGRect) {
@@ -61,9 +65,9 @@ class PasswordFindView: UIView {
     }
     
     func addView() {
-        [emailLabel, emailTextField,contentLabel,titleLabel,findPasswordButton].forEach { view in
-            addSubview(view)
-            view.translatesAutoresizingMaskIntoConstraints = false
+        [emailTextField, emailLabel, contentLabel, titleLabel, findPasswordButton].forEach { item in
+            addSubview(item)
+            item.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
@@ -71,11 +75,13 @@ class PasswordFindView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
             titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            
-            contentLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
         ])
         
+        NSLayoutConstraint.activate([
+            contentLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            contentLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
+        ])
         
         NSLayoutConstraint.activate([
             emailLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 60),
@@ -83,9 +89,9 @@ class PasswordFindView: UIView {
             
             emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 10),
             emailTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            emailTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -50)
-            
+            emailTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
+        
         NSLayoutConstraint.activate([
             findPasswordButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 25),
             findPasswordButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -25),
