@@ -30,4 +30,10 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    //네비게이션 뒤로가기 버튼 타이틀 변경 (이거 사용하실 때 a->b로 이동하면 a에서 선언해야 b에서 수정된답니다)
+    func changeNavigationBackButton() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
 }
