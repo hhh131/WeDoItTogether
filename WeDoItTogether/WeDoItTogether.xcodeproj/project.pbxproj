@@ -19,7 +19,7 @@
 		534F553F2A60723C00A565F8 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F553E2A60723C00A565F8 /* NotificationViewController.swift */; };
 		534F55412A60724E00A565F8 /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55402A60724E00A565F8 /* ChattingView.swift */; };
 		534F55432A60726000A565F8 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55422A60726000A565F8 /* NotificationView.swift */; };
-		534F55E82A68DD3E00A565F8 /* UIView+Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E72A68DD3E00A565F8 /* UIView+Separator.swift */; };
+		534F55E82A68DD3E00A565F8 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E72A68DD3E00A565F8 /* UIView+Extensions.swift */; };
 		534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */; };
 		534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */; };
 		534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */; };
@@ -56,7 +56,7 @@
 		534F553E2A60723C00A565F8 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		534F55402A60724E00A565F8 /* ChattingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
 		534F55422A60726000A565F8 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		534F55E72A68DD3E00A565F8 /* UIView+Separator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Separator.swift"; path = "WeDoItTogether/View/UIView+Separator.swift"; sourceTree = SOURCE_ROOT; };
+		534F55E72A68DD3E00A565F8 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extensions.swift"; path = "WeDoItTogether/Extensions/UIView+Extensions.swift"; sourceTree = SOURCE_ROOT; };
 		534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentsTableViewCell.swift; sourceTree = "<group>"; };
 		534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotificationViewController.swift; sourceTree = "<group>"; };
 		534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +89,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53479FF72A699EDE00645844 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		53479FF82A699F0300645844 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B109F91F2A605C5B002E870C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		53479FF92A699F0800645844 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				534F55382A60713300A565F8 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		53479FFA2A699F1300645844 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				534F55402A60724E00A565F8 /* ChattingView.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		53479FFB2A699F1C00645844 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				534F55422A60726000A565F8 /* NotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		53479FFC2A699F3F00645844 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B109F9212A605D40002E870C /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		53479FFD2A699F4500645844 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				534F553A2A60718600A565F8 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		53479FFE2A699F4E00645844 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */,
+				534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */,
+				534F553E2A60723C00A565F8 /* NotificationViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		53479FFF2A699F5A00645844 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				534F553C2A60721E00A565F8 /* ChattingViewController.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
 		534F55162A603B1000A565F8 = {
 			isa = PBXGroup;
 			children = (
@@ -113,39 +187,40 @@
 				B11477272A6909ED003AB9C7 /* Extensions */,
 				B11477262A6909E1003AB9C7 /* Model */,
 				B109F91C2A605AAA002E870C /* Controller */,
+				53479FF72A699EDE00645844 /* Cell */,
 				B109F91B2A605AA1002E870C /* View */,
 			);
 			path = WeDoItTogether;
 			sourceTree = "<group>";
 		};
-		B101A1BB2A681C9200B92ECF /* Register */ = {
+		B101A1BB2A681C9200B92ECF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				534F55362A603B9400A565F8 /* LoginView.swift */,
 				B101A1BC2A681CEE00B92ECF /* RegisterView.swift */,
+				548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */,
 			);
-			path = Register;
+			path = Login;
 			sourceTree = "<group>";
 		};
-		B101A1BE2A681CF900B92ECF /* Register */ = {
+		B101A1BE2A681CF900B92ECF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */,
 				B101A1BF2A681D0D00B92ECF /* RegisterViewController.swift */,
+				534F55262A603B1000A565F8 /* LoginViewController.swift */,
 			);
-			path = Register;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		B109F91B2A605AA1002E870C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B101A1BB2A681C9200B92ECF /* Register */,
-				548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */,
-				534F55E72A68DD3E00A565F8 /* UIView+Separator.swift */,
-				534F55362A603B9400A565F8 /* LoginView.swift */,
-				B109F91F2A605C5B002E870C /* HomeView.swift */,
-				534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */,
-				534F55382A60713300A565F8 /* ProfileView.swift */,
-				534F55402A60724E00A565F8 /* ChattingView.swift */,
-				534F55422A60726000A565F8 /* NotificationView.swift */,
+				B101A1BB2A681C9200B92ECF /* Login */,
+				53479FF82A699F0300645844 /* Home */,
+				53479FF92A699F0800645844 /* Profile */,
+				53479FFA2A699F1300645844 /* Chatting */,
+				53479FFB2A699F1C00645844 /* Notification */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,16 +228,12 @@
 		B109F91C2A605AAA002E870C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B101A1BE2A681CF900B92ECF /* Register */,
 				B109F9192A605A97002E870C /* TabBarController.swift */,
-				548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */,
-				534F55262A603B1000A565F8 /* LoginViewController.swift */,
-				B109F9212A605D40002E870C /* HomeViewController.swift */,
-				534F553A2A60718600A565F8 /* ProfileViewController.swift */,
-				534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */,
-				534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */,
-				534F553C2A60721E00A565F8 /* ChattingViewController.swift */,
-				534F553E2A60723C00A565F8 /* NotificationViewController.swift */,
+				B101A1BE2A681CF900B92ECF /* Login */,
+				53479FFC2A699F3F00645844 /* Home */,
+				53479FFD2A699F4500645844 /* Profile */,
+				53479FFE2A699F4E00645844 /* Notification */,
+				53479FFF2A699F5A00645844 /* Chatting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +265,7 @@
 				B114772A2A690A22003AB9C7 /* String+Extensions.swift */,
 				B114772C2A690AAC003AB9C7 /* UIViewController+Extensions.swift */,
 				B114772E2A6932C5003AB9C7 /* Encodable+Extensions.swift */,
+				534F55E72A68DD3E00A565F8 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -306,7 +378,7 @@
 				534F553B2A60718600A565F8 /* ProfileViewController.swift in Sources */,
 				B109F9222A605D40002E870C /* HomeViewController.swift in Sources */,
 				534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */,
-				534F55E82A68DD3E00A565F8 /* UIView+Separator.swift in Sources */,
+				534F55E82A68DD3E00A565F8 /* UIView+Extensions.swift in Sources */,
 				534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */,
 				534F55252A603B1000A565F8 /* SceneDelegate.swift in Sources */,
 				B11477292A6909FF003AB9C7 /* User.swift in Sources */,
