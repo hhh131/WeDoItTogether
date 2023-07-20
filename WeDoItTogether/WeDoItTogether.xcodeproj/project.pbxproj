@@ -23,7 +23,8 @@
 		534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */; };
 		534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */; };
 		534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */; };
-		546BE7D22A68199B00E977E7 /* PasswordFindVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546BE7D12A68199B00E977E7 /* PasswordFindVIew.swift */; };
+		548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */; };
+		5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */; };
 		B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101A1BC2A681CEE00B92ECF /* RegisterView.swift */; };
 		B101A1C02A681D0D00B92ECF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101A1BF2A681D0D00B92ECF /* RegisterViewController.swift */; };
 		B109F91A2A605A97002E870C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B109F9192A605A97002E870C /* TabBarController.swift */; };
@@ -59,7 +60,8 @@
 		534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentsTableViewCell.swift; sourceTree = "<group>"; };
 		534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotificationViewController.swift; sourceTree = "<group>"; };
 		534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
-		546BE7D12A68199B00E977E7 /* PasswordFindVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordFindVIew.swift; sourceTree = "<group>"; };
+		548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVIew.swift; sourceTree = "<group>"; };
+		548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		B101A1BC2A681CEE00B92ECF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		B101A1BF2A681D0D00B92ECF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B109F9192A605A97002E870C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -136,7 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				B101A1BB2A681C9200B92ECF /* Register */,
-				546BE7D12A68199B00E977E7 /* PasswordFindVIew.swift */,
+				548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */,
 				534F55E72A68DD3E00A565F8 /* UIView+Separator.swift */,
 				534F55362A603B9400A565F8 /* LoginView.swift */,
 				B109F91F2A605C5B002E870C /* HomeView.swift */,
@@ -153,6 +155,7 @@
 			children = (
 				B101A1BE2A681CF900B92ECF /* Register */,
 				B109F9192A605A97002E870C /* TabBarController.swift */,
+				548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */,
 				534F55262A603B1000A565F8 /* LoginViewController.swift */,
 				B109F9212A605D40002E870C /* HomeViewController.swift */,
 				534F553A2A60718600A565F8 /* ProfileViewController.swift */,
@@ -283,12 +286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B114772D2A690AAC003AB9C7 /* UIViewController+Extensions.swift in Sources */,
-				546BE7D22A68199B00E977E7 /* PasswordFindVIew.swift in Sources */,
+				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
 				534F55392A60713300A565F8 /* ProfileView.swift in Sources */,
 				534F553F2A60723C00A565F8 /* NotificationViewController.swift in Sources */,
 				534F55412A60724E00A565F8 /* ChattingView.swift in Sources */,
 				534F55432A60726000A565F8 /* NotificationView.swift in Sources */,
 				534F55272A603B1000A565F8 /* LoginViewController.swift in Sources */,
+				5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */,
 				B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */,
 				B109F9202A605C5B002E870C /* HomeView.swift in Sources */,
 				534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */,
