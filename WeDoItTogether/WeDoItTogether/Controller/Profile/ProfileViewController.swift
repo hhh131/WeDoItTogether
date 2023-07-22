@@ -20,19 +20,27 @@ class ProfileViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setButtons()
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setButtons(){
+        profileView.profileEditButton.addTarget(self, action: #selector(touchUpProfileEditButton), for: .touchUpInside)
+        profileView.logoutButton.addTarget(self, action: #selector(touchUpLogoutButton), for: .touchUpInside)
     }
-    */
 
+}
+
+//MARK: - 버튼 addTarget
+extension ProfileViewController {
+    
+    //프로필 수정 버튼 클릭
+    @objc func touchUpProfileEditButton(_ sender: UIButton) {
+        let profileEditViewController = ProfileEditViewController(title: "프로필 수정")
+        self.navigationController?.pushViewController(profileEditViewController, animated: true)
+    }
+    @objc func touchUpLogoutButton(_ sender: UIButton){
+        //TODO: 로그아웃 기능 구현 필요
+        print("Logout button Click")
+    }
 }

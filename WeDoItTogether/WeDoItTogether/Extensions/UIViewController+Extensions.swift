@@ -36,4 +36,12 @@ extension UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
+    
+    //원형 이미지 만들기 -> viewDidLayoutSubviews에서 호출
+    func setCircleImageView(imageView: UIImageView, border: CGFloat = 0, borderColor: CGColor = UIColor.clear.cgColor){
+        imageView.layer.cornerRadius = imageView.frame.width / 2.0
+        imageView.layer.borderWidth = border
+        imageView.layer.borderColor = borderColor
+        imageView.clipsToBounds = true
+    }
 }
