@@ -41,7 +41,6 @@ extension ProfileViewController {
         self.navigationController?.pushViewController(profileEditViewController, animated: true)
     }
     @objc func touchUpLogoutButton(_ sender: UIButton){
-        //TODO: 로그아웃 기능 구현 필요
           do {
             try Auth.auth().signOut()
               (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(UINavigationController(rootViewController: LoginViewController()), animated: true)
