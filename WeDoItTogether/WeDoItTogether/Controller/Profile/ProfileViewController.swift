@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController {
     let profileView = ProfileView()
@@ -41,6 +42,11 @@ extension ProfileViewController {
     }
     @objc func touchUpLogoutButton(_ sender: UIButton){
         //TODO: 로그아웃 기능 구현 필요
-        print("Logout button Click")
+          do {
+            try Auth.auth().signOut()
+              (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(UINavigationController(rootViewController: LoginViewController()), animated: true)
+          } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
 }
