@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
     let loginView = LoginView()
+    var errorMessage: String = ""
     
     override func loadView() {
         self.view = loginView
@@ -33,10 +35,24 @@ extension LoginViewController {
     
     //로그인버튼 클릭
     @objc func touchUpLoginButton(_ sender: UIButton) {
+        let email: String = loginView.emailTextField.text!.description
+        let password: String = loginView.passwordTextField.text!.description
+        guard validate() else {
+            resetTextField()
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
+            if authResult != nil {
+                //SceneDelegate changeRootView 호출
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
 
-        //SceneDelegate changeRootView 호출
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
-
+            } else {
+                self.showAlert(message: "등록되지 않은 정보입니다.", yesAction: nil)
+                self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
+                print(error.debugDescription)
+            }
+            
+        }
     }
     
     //회원가입버튼 클릭
@@ -50,5 +66,24 @@ extension LoginViewController {
         //SceneDelegate changeRootView 호출
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(ForgetPasswordViewController(), animated: true)
 
+    }
+    
+    private func validate() -> Bool{
+        guard !loginView.emailTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty,
+              !loginView.passwordTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
+            return false
+        }
+        
+        //email@aaa.com -> 양식 체크
+        guard loginView.emailTextField.text!.contains("@") && loginView.emailTextField.text!.contains(".") else {
+            self.showAlert(message: "이메일 형식이 맞지 않습니다.", yesAction: nil)
+            return false
+        }
+        return true
+    }
+    func resetTextField(){
+        loginView.emailTextField.text = ""
+        loginView.passwordTextField.text = ""
     }
 }
