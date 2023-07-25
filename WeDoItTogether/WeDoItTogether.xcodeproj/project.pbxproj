@@ -214,9 +214,9 @@
 		B101A1BE2A681CF900B92ECF /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */,
-				B101A1BF2A681D0D00B92ECF /* RegisterViewController.swift */,
 				534F55262A603B1000A565F8 /* LoginViewController.swift */,
+				B101A1BF2A681D0D00B92ECF /* RegisterViewController.swift */,
+				548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";

@@ -53,7 +53,6 @@ extension LoginViewController {
                 self.showAlert(message: "등록되지 않은 정보입니다.", yesAction: nil)
                 print(error.debugDescription)
             }
-            
         }
     }
     
@@ -64,10 +63,8 @@ extension LoginViewController {
     }
     
     @objc func touchUpForgetPasswordButton(_ sender: UIButton) {
-
-        //SceneDelegate changeRootView 호출
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(ForgetPasswordViewController(), animated: true)
-
+        let forgetPasswordViewController = ForgetPasswordViewController()
+        self.navigationController?.pushViewController(forgetPasswordViewController, animated: true)
     }
     
     private func validate() -> Bool{
