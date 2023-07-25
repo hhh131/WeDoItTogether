@@ -35,12 +35,15 @@ extension LoginViewController {
     
     //로그인버튼 클릭
     @objc func touchUpLoginButton(_ sender: UIButton) {
-        let email: String = loginView.emailTextField.text!.description
-        let password: String = loginView.passwordTextField.text!.description
-        guard validate() else {
-            resetTextField()
-            return
-        }
+//        let email: String = loginView.emailTextField.text!.description
+//        let password: String = loginView.passwordTextField.text!.description
+//        guard validate() else {
+//            resetTextField()
+//            return
+//        }
+        //MARK: - 임시 유저 데이터
+        let email: String = "test@naver.com"
+        let password: String = "aaa123456"
         Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
             if authResult != nil {
                 //SceneDelegate changeRootView 호출
@@ -48,7 +51,6 @@ extension LoginViewController {
 
             } else {
                 self.showAlert(message: "등록되지 않은 정보입니다.", yesAction: nil)
-                self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
                 print(error.debugDescription)
             }
             
