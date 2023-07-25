@@ -41,7 +41,7 @@ class ForgetPasswordView: UIView {
     lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "ex@email.com"
-        textField.backgroundColor = .gray
+        textField.backgroundColor = .systemGray6
         textField.borderStyle = .roundedRect
         
         return textField
