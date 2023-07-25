@@ -9,14 +9,13 @@ import Foundation
 
 struct Item {
     var title: String
-    var description: String
+    var date: String
+    var location: String
+    var members: [String]
 }
 
 var dataSource: [Item] = [
-    Item(title: "Item 1", description: "내용1"),
-    Item(title: "Item 2", description: "내용2"),
-    Item(title: "Item 3", description: "내용3"),
-    Item(title: "Item 4", description: "내용4"),
-    Item(title: "Item 5", description: "내용5"),
-    Item(title: "Item 6", description: "내용6"),
+    Item(title: "Item 1", date: "2023/07/15 오후 10시 30분", location: "서울 구로구", members: ["오영석", "방유빈"]),
+    Item(title: "Item 1", date: "2023/07/15 오후 10시 30분", location: "서울 구로구", members: ["오영석", "방유빈"]),
+    Item(title: "Item 1", date: "2023/07/15 오후 10시 30분", location: "서울 구로구", members: ["오영석", "방유빈"]),
 ]
