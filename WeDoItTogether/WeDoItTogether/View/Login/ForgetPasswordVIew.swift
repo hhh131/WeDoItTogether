@@ -21,7 +21,7 @@ class ForgetPasswordView: UIView {
     
     lazy var contentLabel: UILabel = {
         let label = UILabel()
-        label.text = "걱정마세요, 저 애플펀치가 찾아드립니다. 이메일 주소를 입력하시면 임시 비밀번호를 발급해드립니다."
+        label.text = "걱정마세요, 저 애플펀치가 찾아드립니다. 이메일 주소를 입력하시면 비밀번호를 바꿀 수 있어요."
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .systemGray
@@ -49,19 +49,20 @@ class ForgetPasswordView: UIView {
     
     lazy var findPasswordButton: UIButton = {
         let button = UIButton(configuration: .filled())
-        button.setTitle("임시 비밀번호 받기", for: .normal)
+        button.setTitle("비밀번호 변경하기", for: .normal)
         
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .white
         addView()
         setLayoutConstraints()
     }
     
     required init?(coder: NSCoder) {
-        super .init(coder: coder)
+        super.init(coder: coder)
     }
     
     func addView() {
