@@ -44,7 +44,6 @@ class ProfileView: UIView {
         button.contentHorizontalAlignment = .left
         button.contentVerticalAlignment = .center
         button.addSeparator(at: .top, color: .black)
-
         
         return button
     }()

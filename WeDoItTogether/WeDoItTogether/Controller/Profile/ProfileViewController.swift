@@ -7,9 +7,12 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+import FirebaseCore
 
 class ProfileViewController: UIViewController {
     let profileView = ProfileView()
+    var user: User?
     
     convenience init(title: String) {
         self.init()
@@ -19,17 +22,29 @@ class ProfileViewController: UIViewController {
     override func loadView() {
         self.view = profileView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtons()
-        // Do any additional setup after loading the view.
+        setProfileData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setProfileData()
     }
     
     func setButtons(){
         profileView.profileEditButton.addTarget(self, action: #selector(touchUpProfileEditButton), for: .touchUpInside)
         profileView.logoutButton.addTarget(self, action: #selector(touchUpLogoutButton), for: .touchUpInside)
     }
-
+    
+    // 사용자 정보 불러오기
+    func setProfileData(){
+        user = self.fetchUser()
+        self.profileView.emailLabel.text = self.user?.email
+        self.profileView.nameLabel.text = self.user?.name
+    }
 }
 
 //MARK: - 버튼 addTarget

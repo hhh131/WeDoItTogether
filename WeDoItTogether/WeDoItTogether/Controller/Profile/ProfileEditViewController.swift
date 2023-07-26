@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ProfileEditViewController: UIViewController {
     let profileEditView = ProfileEditView()
     let imgPicker = UIImagePickerController()
+    var user: User?
     
     convenience init(title: String) {
         self.init()
@@ -25,8 +28,13 @@ class ProfileEditViewController: UIViewController {
         imgPicker.delegate = self
         setButtons()
         setImageView()
+        setTextField()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setTextField()
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setCircleImageView(imageView: profileEditView.profilePhotoImageView, border: 1, borderColor: UIColor.gray.cgColor)
@@ -43,13 +51,30 @@ class ProfileEditViewController: UIViewController {
         profileEditView.profilePhotoImageView.addGestureRecognizer(profileImage)
 
     }
-        
+    
+    func setTextField(){
+        user = self.fetchUser()
+        profileEditView.nameTextField.text = user?.name
+    }
 }
 
 //MARK: - Button AddTarget
 extension ProfileEditViewController{
     @objc func touchUpSavebutton(_ sender: UIBarButtonItem){
-        //TODO: 데이터 저장 로직 필요
+        guard !profileEditView.nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
+            return
+        }
+        let ref: DatabaseReference!
+        ref = Database.database().reference()
+        let newName: String = profileEditView.nameTextField.text!
+        let email: String = user?.email ?? ""
+        let password: String = user?.password ?? ""
+        self.user = User(email: email, name: newName, password: password)
+        self.saveUser(user: self.user)
+        
+        ref.child("users").child("-Na9r2LimDidcAkOg5yo").updateChildValues(["name": newName])
+        
         self.navigationController?.popViewController(animated: true)
     }
     

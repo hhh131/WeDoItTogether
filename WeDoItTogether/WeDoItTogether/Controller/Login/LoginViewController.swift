@@ -7,11 +7,13 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
 
     let loginView = LoginView()
     var errorMessage: String = ""
+    var user: User?
     
     override func loadView() {
         self.view = loginView
@@ -47,6 +49,7 @@ extension LoginViewController {
         Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
             if authResult != nil {
                 //SceneDelegate changeRootView 호출
+                self.setUserData()
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
 
             } else {
@@ -81,8 +84,31 @@ extension LoginViewController {
         }
         return true
     }
+    
     func resetTextField(){
         loginView.emailTextField.text = ""
         loginView.passwordTextField.text = ""
     }
+    
+    // 사용자 정보 불러오기
+    func setUserData(){
+        let ref: DatabaseReference!
+        ref = Database.database().reference()
+//        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").child("-Na9r2LimDidcAkOg5yo").observeSingleEvent(of: .value, with: { snapshot in
+          // Get user value
+            guard let value = snapshot.value as? NSDictionary else{
+                return
+            }
+            
+            self.user = User(email: value["email"] as? String ?? "",
+                             name: value["name"] as? String ?? "Name",
+                             password: value["password"] as? String ?? "")
+            self.saveUser(user: self.user)
+            
+        }) { error in
+          print(error.localizedDescription)
+        }
+    }
+    
 }
