@@ -19,8 +19,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNavigations()
         setButtons()
+    }
+    
+    func setNavigations() {
+        self.changeNavigationBackButton()
     }
     
     func setButtons() {
