@@ -34,14 +34,12 @@ class AddContentView: UIView {
         textField.font = .systemFont(ofSize: 20)
         textField.backgroundColor = .white
         textField.layer.borderWidth = 1.0
-//        textField.layer.borderColor = isTitleTextFieldisEmpty ? UIColor.red.cgColor : UIColor.black.cgColor
         
         return textField
     }()
     
     lazy var redTitleLabel: UILabel = {
         let label = UILabel()
-//        label.text = isTitleTextFieldisEmpty ? "약속 이름을 작성해주세요." : ""
         label.textAlignment = .left
         label.textColor = .red
         label.font = .boldSystemFont(ofSize: 15)
@@ -69,7 +67,7 @@ class AddContentView: UIView {
     lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
-//        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         
         return datePicker
     }()
@@ -189,4 +187,11 @@ class AddContentView: UIView {
             memoTextField.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
+    
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateResultLabel.text = formatter.string(from: sender.date)
+    }
+    
 }

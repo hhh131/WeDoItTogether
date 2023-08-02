@@ -6,13 +6,9 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController, AddContentDelegate {
-    func didSaveItem(_ item: Item) {
-        testModel.append(item)
-        homeView.collectionView.reloadData()
-    }
-    
     
     let homeView = HomeView()
     var testModel = dataSource
@@ -34,7 +30,7 @@ class HomeViewController: UIViewController, AddContentDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeView.collectionView.reloadData()
+        getDatabaseInfo()
     }
     
     @objc private func addButtonTapped() {
@@ -51,6 +47,36 @@ class HomeViewController: UIViewController, AddContentDelegate {
     
     @objc private func dismissNewPostVC() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func getDatabaseInfo() {
+        let ref = Database.database().reference()
+        
+        let itemsRef = ref.child("items")
+        
+        itemsRef.observeSingleEvent(of: .value) { (snapshot) in
+            if let items = snapshot.children.allObjects as? [DataSnapshot] {
+                for itemSnapshot in items {
+                    if let itemInfo = itemSnapshot.value as? [String: Any],
+                       let title = itemInfo["title"] as? String,
+                       let location = itemInfo["location"] as? String,
+                       let memo = itemInfo["memo"] as? String,
+                       let date = itemInfo["date"] as? String {
+                       let members = itemInfo["members"] as? [String] ?? []
+                        
+                        let item = Item(title: title, date: date, location: location, memo: memo, members: members)
+                       self.testModel.append(item)
+                    }
+                }
+                
+                self.homeView.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func didSaveItem(_ item: Item) {
+        testModel.append(item)
+        homeView.collectionView.reloadData()
     }
     
 }
@@ -78,6 +104,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.titleLabel.text = item.title
         cell.locationLabel.text = item.location
         cell.dateLabel.text = item.date
+        cell.memoLabel.text = "memo: \(item.memo)"
         
         let membersString = item.members.joined(separator: ", ")
         cell.membersLabel.text = membersString
