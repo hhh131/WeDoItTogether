@@ -12,4 +12,9 @@ struct User: Codable  {
     let name: String
     let password: String
     var joined: TimeInterval = Date().timeIntervalSince1970
+    var userId:String {
+        var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+        return safeEmail
+    }
 }

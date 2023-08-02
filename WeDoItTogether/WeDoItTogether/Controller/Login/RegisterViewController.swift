@@ -122,15 +122,19 @@ extension RegisterViewController {
                     switch ErrorCode {
                     case AuthErrorCode.invalidEmail:
                         self?.showAlert(message: "유효하지 않은 이메일 입니다.", yesAction: nil)
+                        return
                         
                     case AuthErrorCode.emailAlreadyInUse:
                         self?.showAlert(message: "이미 가입한 회원 입니다.", yesAction: nil)
+                        return
                         
                     case AuthErrorCode.weakPassword:
                         self?.showAlert(message: "비밀번호를 8자이상 입력하세요.", yesAction: nil)
+                        return
                         
                     default:
                         self?.showAlert(message: "다시 한번 확인해 주세요.", yesAction: nil)
+                        return
                     }
                 }
             }
@@ -152,8 +156,9 @@ extension RegisterViewController {
                            joined: Date().timeIntervalSince1970)
         
         let ref = Database.database().reference()
+        print("\(String(describing: Auth.auth().currentUser?.uid))")
         ref.child("users")
-            .childByAutoId()
+            .child("\(newUser.userId)")
             .setValue(newUser.asDictionary())
         
     }
