@@ -18,11 +18,11 @@ class HomeViewController: UIViewController, AddContentDelegate {
         self.title = title
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
-        
-        navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.rightBarButtonItem = addButton
     }
     
     override func loadView() {
+        super.loadView()
         self.view = homeView
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
@@ -31,6 +31,17 @@ class HomeViewController: UIViewController, AddContentDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getDatabaseInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    //
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     @objc private func addButtonTapped() {
@@ -45,6 +56,7 @@ class HomeViewController: UIViewController, AddContentDelegate {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
+    //안쓰는 함수는 지우는 게 좋지 않을까여~?
     @objc private func dismissNewPostVC() {
         dismiss(animated: true, completion: nil)
     }
@@ -115,5 +127,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         return 25
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailContentViewController = DetailContentViewController()
+        detailContentViewController.item = testModel[indexPath.item]
+        self.navigationController?.pushViewController(detailContentViewController, animated: true)
     }
 }

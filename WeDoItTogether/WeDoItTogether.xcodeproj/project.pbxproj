@@ -122,6 +122,7 @@
 			children = (
 				B109F91F2A605C5B002E870C /* HomeView.swift */,
 				4BDD0FDB2A6A19E80065D5C1 /* AddContentView.swift */,
+				4BF855FF2A6F9065006F2B5C /* addview.swift */,
 				4BDD0FDD2A6A1AB60065D5C1 /* DetailContentView.swift */,
 			);
 			path = Home;
@@ -155,9 +156,9 @@
 		53479FFC2A699F3F00645844 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4BDD0FDF2A6A20230065D5C1 /* DetailContentViewController.swift */,
 				4BF7A0082A6CE9BC004F5C36 /* HomeViewController.swift */,
 				4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */,
+				4BDD0FDF2A6A20230065D5C1 /* DetailContentViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

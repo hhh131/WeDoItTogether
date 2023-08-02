@@ -9,23 +9,25 @@ import UIKit
 
 class DetailContentViewController: UIViewController {
 
+    let detailContentView = DetailContentView()
     var item: Item?
+    
+    override func loadView() {
+        super.loadView()
+        self.view = detailContentView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
-        let detailContentView = DetailContentView()
-        
+        updateUILable()
+    }
+    
+    func updateUILable() {
         detailContentView.titleLabel.text = item?.title
         detailContentView.locationLabel.text = item?.location
         detailContentView.dateLabel.text = item?.date
         let membersString = item?.members.joined(separator: ", ") ?? ""
         detailContentView.membersLabel.text = membersString
-        
-        view.addSubview(detailContentView)
-        detailContentView.translatesAutoresizingMaskIntoConstraints = false
-        
     }
 }

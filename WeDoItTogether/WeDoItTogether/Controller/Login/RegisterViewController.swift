@@ -24,6 +24,7 @@ class RegisterViewController: UIViewController {
     var isAuthNumCheck: Bool = false
     
     override func loadView() {
+        super.loadView()
         self.view = registerView
     }
     
