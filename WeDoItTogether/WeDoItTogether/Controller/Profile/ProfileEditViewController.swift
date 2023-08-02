@@ -43,6 +43,7 @@ class ProfileEditViewController: UIViewController {
     
     func setButtons(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(touchUpSavebutton))
+        profileEditView.editPasswordButton.addTarget(self, action: #selector(touchUpEditPasswordButton), for: .touchUpInside)
     }
     
     func setImageView(){
@@ -60,6 +61,7 @@ class ProfileEditViewController: UIViewController {
 
 //MARK: - Button AddTarget
 extension ProfileEditViewController{
+    //저장 버튼
     @objc func touchUpSavebutton(_ sender: UIBarButtonItem){
         guard !profileEditView.nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
             self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
@@ -76,6 +78,12 @@ extension ProfileEditViewController{
         ref.child("users").child("-Na9r2LimDidcAkOg5yo").updateChildValues(["name": newName])
         
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //비밀 번호 변경 버튼
+    @objc func touchUpEditPasswordButton(_ sender: UIButton){
+        let passwordEditViewController = PasswordEditViewController(title: "비밀번호 변경")
+        self.navigationController?.pushViewController(passwordEditViewController, animated: true)
     }
     
 }
