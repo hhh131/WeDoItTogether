@@ -33,6 +33,14 @@ class HomeViewContentCell: UICollectionViewCell {
         return label
     }()
     
+    let memoLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 12)
+        
+        return label
+    }()
+    
     let membersLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -52,7 +60,7 @@ class HomeViewContentCell: UICollectionViewCell {
     }
     
     private func addViews() {
-        [titleLabel, locationLabel, dateLabel, membersLabel].forEach { item in
+        [titleLabel, locationLabel, dateLabel, memoLabel, membersLabel].forEach { item in
             contentView.addSubview(item)
             item.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -77,8 +85,11 @@ class HomeViewContentCell: UICollectionViewCell {
             dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor),
             
+            memoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            memoLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
+            
             membersLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            membersLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: padding + 5)
+            membersLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: padding + 5)
         ])
     }
 }

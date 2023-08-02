@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
-class HomeViewController: UIViewController, NewPostViewControllerDelegate {
+class HomeViewController: UIViewController, AddContentDelegate {
     
     let homeView = HomeView()
+    var testModel = dataSource
     
     convenience init(title: String) {
         self.init()
@@ -22,18 +24,19 @@ class HomeViewController: UIViewController, NewPostViewControllerDelegate {
     
     override func loadView() {
         self.view = homeView
+        homeView.collectionView.delegate = self
+        homeView.collectionView.dataSource = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeView.collectionView.reloadData()
+        getDatabaseInfo()
     }
     
     @objc private func addButtonTapped() {
-        let newPostVC = NewPostViewController()
-        newPostVC.delegate = self // Set the delegate
-        newPostVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(newPostVC, animated: true)
+        let addContentViewController = AddContentViewController()
+        addContentViewController.delegate = self
+        navigationController?.pushViewController(addContentViewController, animated: true)
     }
     
     @objc private func anyCellClicked() {
@@ -46,26 +49,39 @@ class HomeViewController: UIViewController, NewPostViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func newPostViewController(_ viewController: NewPostViewController, didAddNewItem item: Item) {
-        homeView.testModel.append(item)
-        homeView.collectionView.reloadData() // Reload the collection view with the updated testModel
+    @objc private func getDatabaseInfo() {
+        let ref = Database.database().reference()
+        
+        let itemsRef = ref.child("items")
+        
+        itemsRef.observeSingleEvent(of: .value) { (snapshot) in
+            if let items = snapshot.children.allObjects as? [DataSnapshot] {
+                for itemSnapshot in items {
+                    if let itemInfo = itemSnapshot.value as? [String: Any],
+                       let title = itemInfo["title"] as? String,
+                       let location = itemInfo["location"] as? String,
+                       let memo = itemInfo["memo"] as? String,
+                       let date = itemInfo["date"] as? String {
+                       let members = itemInfo["members"] as? [String] ?? []
+                        
+                        let item = Item(title: title, date: date, location: location, memo: memo, members: members)
+                       self.testModel.append(item)
+                    }
+                }
+                
+                self.homeView.collectionView.reloadData()
+            }
+        }
     }
+    
+    func didSaveItem(_ item: Item) {
+        testModel.append(item)
+        homeView.collectionView.reloadData()
+    }
+    
 }
 
-extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func findViewController() -> UIViewController? {
-        var responder: UIResponder? = self
-        
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                return viewController
-            }
-            responder = nextResponder
-        }
-        
-        return nil
-    }
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -88,20 +104,12 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         cell.titleLabel.text = item.title
         cell.locationLabel.text = item.location
         cell.dateLabel.text = item.date
+        cell.memoLabel.text = "memo: \(item.memo)"
+        
         let membersString = item.members.joined(separator: ", ")
         cell.membersLabel.text = membersString
         
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selecteditem = testModel[indexPath.item]
-        
-        if let homeViewController = self.findViewController() as? HomeViewController {
-            let detailViewController = DetailContentViewController()
-            detailViewController.item = selecteditem
-            homeViewController.navigationController?.pushViewController(detailViewController, animated: true)
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -109,4 +117,3 @@ extension HomeView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         return 25
     }
 }
-

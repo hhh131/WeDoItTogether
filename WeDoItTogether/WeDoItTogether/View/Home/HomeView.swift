@@ -24,8 +24,6 @@ class HomeView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.register(HomeViewContentCell.self, forCellWithReuseIdentifier: "Cell")
         
         return collectionView
@@ -58,5 +56,3 @@ class HomeView: UIView {
         ])
     }
 }
-
-
