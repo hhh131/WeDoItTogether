@@ -6,6 +6,8 @@
 	<string>Access the gallery to set your profile image </string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access the camera to set your profile image </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>위치 설정 권한을 설정해주세요.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

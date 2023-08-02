@@ -91,13 +91,15 @@ class DetailContentView: UIView {
         return label
     }()
     
-    lazy var collectionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 20
-        view.layer.shadowRadius = 3
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         
-        return view
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        
+        return collectionView
     }()
     
     override init(frame: CGRect) {
@@ -159,8 +161,8 @@ class DetailContentView: UIView {
             detailContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             
             collectionView.topAnchor.constraint(equalTo: detailContentView.bottomAnchor, constant: padding),
-            collectionView.leadingAnchor.constraint(equalTo: detailContentView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: detailContentView.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
             
