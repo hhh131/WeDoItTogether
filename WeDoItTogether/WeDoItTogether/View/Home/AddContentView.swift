@@ -7,13 +7,8 @@
 
 import UIKit
 
-protocol NewPostViewControllerDelegate: AnyObject {
-    func newPostViewController(_ viewController: NewPostViewController, didAddNewItem item: Item)
-}
 
-class NewPostViewController: UIViewController {
-    
-    weak var delegate: NewPostViewControllerDelegate?
+class AddContentView: UIView {
     
     var testModel = dataSource
     
@@ -21,6 +16,7 @@ class NewPostViewController: UIViewController {
     var locationText: String = ""
     var memoText: String = ""
     var dateString: String = ""
+    
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -37,8 +33,18 @@ class NewPostViewController: UIViewController {
         textField.borderStyle = .bezel
         textField.font = .systemFont(ofSize: 20)
         textField.backgroundColor = .white
+        textField.layer.borderWidth = 1.0
         
         return textField
+    }()
+    
+    lazy var redTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = .red
+        label.font = .boldSystemFont(ofSize: 15)
+        
+        return label
     }()
     
     lazy var dateLabel: UILabel = {
@@ -105,100 +111,87 @@ class NewPostViewController: UIViewController {
         return textField
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
         addViews()
         setLayoutConstraints()
-        configureUI()
     }
     
-    func configureUI() {
-        view.backgroundColor = .systemBackground
-        setNavigation()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addViews(){
-        [titleLabel, titleTextField, dateLabel, datePicker, locationLabel, locationTextField, memoLabel, memoTextField, dateResultLabel]
+        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, locationTextField, memoLabel, memoTextField, dateResultLabel]
             .forEach { item in
                 item.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(item)
+                self.addSubview(item)
             }
-    }
-    
-    func setNavigation() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "작성 완료", style: .plain, target: self, action: #selector(saveButtonTapped))
     }
     
     func setLayoutConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 25),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
             
             titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            titleTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            titleTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             titleTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            redTitleLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 5),
+            redTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            redTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
         ])
         
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 25),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             dateLabel.heightAnchor.constraint(equalToConstant: 50),
             
             dateResultLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
-            dateResultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            dateResultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            dateResultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            dateResultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             dateResultLabel.heightAnchor.constraint(equalToConstant: 50),
             
             datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
-            datePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            datePicker.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
         ])
         
         NSLayoutConstraint.activate([
             locationLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 25),
-            locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            locationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             locationLabel.heightAnchor.constraint(equalToConstant: 50),
             
             locationTextField.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5),
-            locationTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            locationTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            locationTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            locationTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             locationTextField.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         NSLayoutConstraint.activate([
             memoLabel.topAnchor.constraint(equalTo: locationTextField.bottomAnchor, constant: 25),
-            memoLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            memoLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             memoLabel.heightAnchor.constraint(equalToConstant: 50),
             
             memoTextField.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
-            memoTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            memoTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            memoTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            memoTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             memoTextField.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
     
-    
-    @objc func saveButtonTapped() {
-        testModel.append(Item(title: titleText, date: dateString, location: locationText, members: ["오영석", "방유빈", "홍길동"]))
-        
-        delegate?.newPostViewController(self, didAddNewItem: testModel.last!)
-        
-        navigationController?.popViewController(animated: true)
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateResultLabel.text = formatter.string(from: sender.date)
     }
     
-    @objc func datePickerValueChanged(_ datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
-        
-        dateString = dateFormatter.string(from: datePicker.date)
-        
-        dateResultLabel.text = dateString
-    }
 }
-

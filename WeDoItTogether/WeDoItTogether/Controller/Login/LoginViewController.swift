@@ -16,13 +16,18 @@ class LoginViewController: UIViewController {
     var user: User?
     
     override func loadView() {
+        super.loadView()
         self.view = loginView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNavigations()
         setButtons()
+    }
+    
+    func setNavigations() {
+        self.changeNavigationBackButton()
     }
     
     func setButtons() {

@@ -25,7 +25,8 @@ class RegisterView: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "회원이 되어보세요~"
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 22)
+        label.textColor = .black
         
         return label
     }()
@@ -34,6 +35,7 @@ class RegisterView: UIView {
     lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일 주소"
+        label.textColor = .black
         
         return label
     }()
@@ -57,6 +59,7 @@ class RegisterView: UIView {
     lazy var authNumLabel: UILabel = {
         let label = UILabel()
         label.text = "인증번호"
+        label.textColor = .black
         
         return label
     }()
@@ -80,6 +83,7 @@ class RegisterView: UIView {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
+        label.textColor = .black
         
         return label
     }()
@@ -96,6 +100,7 @@ class RegisterView: UIView {
     lazy var passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호"
+        label.textColor = .black
         
         return label
     }()
@@ -123,6 +128,7 @@ class RegisterView: UIView {
     lazy var passwordCheckLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호 확인"
+        label.textColor = .black
         
         return label
     }()
@@ -161,7 +167,7 @@ class RegisterView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super .init(coder: coder)
+        super.init(coder: coder)
     }
     
     func addView() {
