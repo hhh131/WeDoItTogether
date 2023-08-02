@@ -21,10 +21,14 @@ extension UIViewController {
     }
     
     //알림창 띄우기
-    func showAlert(message: String, yesAction: (() -> Void)?) {
-        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+    func showAlert(message: String, title: String = "알림", isCancelButton: Bool = false, yesAction: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let yes = UIAlertAction(title: "확인", style: .default) {_ in
             yesAction?()
+        }
+        if isCancelButton {
+            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(cancel)
         }
         alert.addAction(yes)
         
@@ -43,5 +47,30 @@ extension UIViewController {
         imageView.layer.borderWidth = border
         imageView.layer.borderColor = borderColor
         imageView.clipsToBounds = true
+    }
+    
+    //userDefault에 저장된 유저정보 가져오기
+    func fetchUser() -> User? {
+        do {
+            if let data = UserDefaults.standard.object(forKey: "user") as? Data {
+                let decoder: JSONDecoder = JSONDecoder()
+                return try decoder.decode(User.self, from: data)
+            }
+        } catch {
+            print("UserDefaults로 부터 데이터 가져오기 실패")
+        }
+        return nil
+    }
+    
+    //userDefaults에 넣기
+    func saveUser(user: User?){
+        do {
+            let endcoder: JSONEncoder = JSONEncoder()
+            let data: Data = try endcoder.encode(user)
+
+            UserDefaults.standard.set(data, forKey: "user")
+        } catch {
+            print("JSON 생성 후 UserDefaults 실패")
+        }
     }
 }

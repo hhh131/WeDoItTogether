@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ProfileEditViewController: UIViewController {
     let profileEditView = ProfileEditView()
     let imgPicker = UIImagePickerController()
+    var user: User?
     
     convenience init(title: String) {
         self.init()
@@ -25,8 +28,13 @@ class ProfileEditViewController: UIViewController {
         imgPicker.delegate = self
         setButtons()
         setImageView()
+        setTextField()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setTextField()
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setCircleImageView(imageView: profileEditView.profilePhotoImageView, border: 1, borderColor: UIColor.gray.cgColor)
@@ -35,6 +43,7 @@ class ProfileEditViewController: UIViewController {
     
     func setButtons(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(touchUpSavebutton))
+        profileEditView.editPasswordButton.addTarget(self, action: #selector(touchUpEditPasswordButton), for: .touchUpInside)
     }
     
     func setImageView(){
@@ -43,14 +52,38 @@ class ProfileEditViewController: UIViewController {
         profileEditView.profilePhotoImageView.addGestureRecognizer(profileImage)
 
     }
-        
+    
+    func setTextField(){
+        user = self.fetchUser()
+        profileEditView.nameTextField.text = user?.name
+    }
 }
 
 //MARK: - Button AddTarget
 extension ProfileEditViewController{
+    //저장 버튼
     @objc func touchUpSavebutton(_ sender: UIBarButtonItem){
-        //TODO: 데이터 저장 로직 필요
+        guard !profileEditView.nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
+            return
+        }
+        let ref: DatabaseReference!
+        ref = Database.database().reference()
+        let newName: String = profileEditView.nameTextField.text!
+        let email: String = user?.email ?? ""
+        let password: String = user?.password ?? ""
+        self.user = User(email: email, name: newName, password: password)
+        self.saveUser(user: self.user)
+        
+        ref.child("users").child("-Na9r2LimDidcAkOg5yo").updateChildValues(["name": newName])
+        
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //비밀 번호 변경 버튼
+    @objc func touchUpEditPasswordButton(_ sender: UIButton){
+        let passwordEditViewController = PasswordEditViewController(title: "비밀번호 변경")
+        self.navigationController?.pushViewController(passwordEditViewController, animated: true)
     }
     
 }

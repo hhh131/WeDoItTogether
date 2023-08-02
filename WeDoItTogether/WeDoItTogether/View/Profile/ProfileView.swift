@@ -34,13 +34,16 @@ class ProfileView: UIView {
     }()
     
     lazy var profileEditButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("프로필 수정", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        var titleAttr = AttributedString.init("프로필 수정")
+        titleAttr.font = .systemFont(ofSize: 18.0)
+        let button = UIButton(configuration: .plain())
+        button.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        button.configuration?.attributedTitle = titleAttr
+        button.configuration?.baseForegroundColor = .black
+        button.tintColor = .gray
         button.contentHorizontalAlignment = .left
         button.contentVerticalAlignment = .center
         button.addSeparator(at: .top, color: .black)
-
         
         return button
     }()
@@ -66,9 +69,13 @@ class ProfileView: UIView {
     }()
     
     lazy var logoutButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("로그아웃", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        var titleAttr = AttributedString.init("로그아웃")
+        titleAttr.font = .systemFont(ofSize: 18.0)
+        let button = UIButton(configuration: .plain())
+        button.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        button.configuration?.attributedTitle = titleAttr
+        button.configuration?.baseForegroundColor = .black
+        button.tintColor = .gray
         button.contentHorizontalAlignment = .left
         button.addSeparator(at: .top, color: .black)
         button.addSeparator(at: .bottom, color: .black)
