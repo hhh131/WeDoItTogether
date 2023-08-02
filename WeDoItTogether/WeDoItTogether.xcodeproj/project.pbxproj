@@ -45,6 +45,9 @@
 		B114772B2A690A23003AB9C7 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114772A2A690A22003AB9C7 /* String+Extensions.swift */; };
 		B114772D2A690AAC003AB9C7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114772C2A690AAC003AB9C7 /* UIViewController+Extensions.swift */; };
 		B114772F2A6932C6003AB9C7 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B114772E2A6932C5003AB9C7 /* Encodable+Extensions.swift */; };
+		B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */; };
+		B18B47CE2A7AC903006EC979 /* UserDefaultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */; };
+		B18B47D02A7AC98A006EC979 /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */; };
 		B1E5CB8A2A70B3F4004317EE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB892A70B3F4004317EE /* FirebaseAuth */; };
 		B1E5CB8C2A70B3F4004317EE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8B2A70B3F4004317EE /* FirebaseDatabase */; };
 		B1E5CB8E2A70B3F4004317EE /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8D2A70B3F4004317EE /* FirebaseDatabaseSwift */; };
@@ -93,6 +96,9 @@
 		B114772A2A690A22003AB9C7 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B114772C2A690AAC003AB9C7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		B114772E2A6932C5003AB9C7 /* Encodable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extensions.swift"; sourceTree = "<group>"; };
+		B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
+		B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
+		B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		B1E5CB842A70A989004317EE /* MailCore2_bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCore2_bridge.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +123,7 @@
 			children = (
 				534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */,
 				4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */,
+				B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -126,7 +133,6 @@
 			children = (
 				B109F91F2A605C5B002E870C /* HomeView.swift */,
 				4BDD0FDB2A6A19E80065D5C1 /* AddContentView.swift */,
-				4BF855FF2A6F9065006F2B5C /* addview.swift */,
 				4BDD0FDD2A6A1AB60065D5C1 /* DetailContentView.swift */,
 			);
 			path = Home;
@@ -217,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				B109F92C2A60688D002E870C /* Others */,
+				B18B47CC2A7AC8D0006EC979 /* UserDefaults */,
 				B11477272A6909ED003AB9C7 /* Extensions */,
 				B11477262A6909E1003AB9C7 /* Model */,
 				B109F91C2A605AAA002E870C /* Controller */,
@@ -289,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				B11477282A6909FF003AB9C7 /* User.swift */,
+				B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */,
 				4B21D3382A6A172F00352B29 /* HomeTestModel.swift */,
 			);
 			path = Model;
@@ -310,6 +318,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B18B47CC2A7AC8D0006EC979 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +413,7 @@
 				B114772D2A690AAC003AB9C7 /* UIViewController+Extensions.swift in Sources */,
 				53A724712A6BB9260098A3B3 /* ProfileEditViewController.swift in Sources */,
 				53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */,
+				B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */,
 				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
 				4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */,
 				53A724F02A717BE70098A3B3 /* PasswordEditView.swift in Sources */,
@@ -406,6 +423,7 @@
 				534F55412A60724E00A565F8 /* ChattingView.swift in Sources */,
 				534F55432A60726000A565F8 /* NotificationView.swift in Sources */,
 				534F55272A603B1000A565F8 /* LoginViewController.swift in Sources */,
+				B18B47D02A7AC98A006EC979 /* CurrentLocation.swift in Sources */,
 				5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */,
 				B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */,
 				B109F9202A605C5B002E870C /* HomeView.swift in Sources */,
@@ -425,6 +443,7 @@
 				534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */,
 				534F55E82A68DD3E00A565F8 /* UIView+Extensions.swift in Sources */,
 				534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */,
+				B18B47CE2A7AC903006EC979 /* UserDefaultsData.swift in Sources */,
 				4B46DB122A6D551100EA7903 /* HomeViewContentCell.swift in Sources */,
 				534F55252A603B1000A565F8 /* SceneDelegate.swift in Sources */,
 				B11477292A6909FF003AB9C7 /* User.swift in Sources */,
