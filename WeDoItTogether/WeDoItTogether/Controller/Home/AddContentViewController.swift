@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 protocol AddContentDelegate: AnyObject {
     func didSaveItem(_ item: Item)
@@ -34,7 +35,13 @@ class AddContentViewController: UIViewController {
         let memoText = contentView.memoTextField.text ?? ""
         let dateString = contentView.dateResultLabel.text ?? ""
 
-        let newItem = Item(title: titleText, date: dateString, location: locationText, members: [])
+        let newItem = Item(title: titleText, date: dateString, location: locationText, memo: memoText, members: [])
+        let newItemDictionary = newItem.asDictionary()
+        
+        let database = Database.database().reference()
+        let newItemRef = database.child("items").childByAutoId()
+
+        newItemRef.setValue(newItemDictionary)
 
         delegate?.didSaveItem(newItem)
 
@@ -44,5 +51,5 @@ class AddContentViewController: UIViewController {
     @objc func cancelButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
-        
+    
 }
