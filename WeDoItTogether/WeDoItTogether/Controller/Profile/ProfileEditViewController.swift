@@ -75,7 +75,9 @@ extension ProfileEditViewController{
         self.user = User(email: email, name: newName, password: password)
         self.saveUser(user: self.user)
         
-        ref.child("users").child("-Na9r2LimDidcAkOg5yo").updateChildValues(["name": newName])
+        guard let userId = user?.userId else { return }
+        
+        ref.child("users").child(userId).updateChildValues(["name": newName])
         
         self.navigationController?.popViewController(animated: true)
     }

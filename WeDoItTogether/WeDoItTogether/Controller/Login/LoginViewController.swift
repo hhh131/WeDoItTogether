@@ -49,8 +49,8 @@ extension LoginViewController {
 //            return
 //        }
         //MARK: - 임시 유저 데이터
-        let email: String = "test@naver.com"
-        let password: String = "aaa123456"
+        let email: String = "test2@email.com"
+        let password: String = "qqqq1111"
         Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
             if authResult != nil {
                 //SceneDelegate changeRootView 호출
@@ -99,8 +99,12 @@ extension LoginViewController {
     func setUserData(){
         let ref: DatabaseReference!
         ref = Database.database().reference()
-//        let userID = Auth.auth().currentUser?.uid
-        ref.child("users").child("-Na9r2LimDidcAkOg5yo").observeSingleEvent(of: .value, with: { snapshot in
+//        var safeEmail = loginView.emailTextField.text!.replacingOccurrences(of: ".", with: "-")
+//        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+//        ref.child("users").child("\(safeEmail)")
+        
+        //임시 데이터
+        ref.child("users").child("Test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? NSDictionary else{
                 return

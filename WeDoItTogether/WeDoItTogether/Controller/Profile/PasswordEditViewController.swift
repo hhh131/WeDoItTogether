@@ -85,7 +85,8 @@ extension PasswordEditViewController {
         self.user = User(email: email, name: name, password: newPassword)
         self.saveUser(user: self.user)
         
-        ref.child("users").child("-Na9r2LimDidcAkOg5yo").updateChildValues(["password": newPassword])
+        guard let userId = user?.userId else { return }
+        ref.child("users").child(userId).updateChildValues(["password": newPassword])
         
         self.navigationController?.popViewController(animated: true)
     }
