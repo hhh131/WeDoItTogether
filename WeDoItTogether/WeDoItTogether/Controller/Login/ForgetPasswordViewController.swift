@@ -14,6 +14,7 @@ class ForgetPasswordViewController: UIViewController {
     var userEmail: String?
     
     override func loadView() {
+        super.loadView()
         self.view = forgetPasswordView
     }
     

@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     var errorMessage: String = ""
     
     override func loadView() {
+        super.loadView()
         self.view = loginView
     }
     
