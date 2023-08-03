@@ -77,7 +77,7 @@ extension DetailContentViewController: UICollectionViewDelegate, UICollectionVie
         
         let pin = MKPointAnnotation()
         pin.coordinate = center
-        pin.title = "나 여깄지롱"
+        pin.title = "나 바꿨지롱"
         cell.mapView.addAnnotation(pin)
         
         return cell
