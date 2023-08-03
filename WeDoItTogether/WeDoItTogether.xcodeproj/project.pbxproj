@@ -30,7 +30,6 @@
 		534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */; };
 		534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */; };
 		534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */; };
-		5388B71E2A7ACDDA004B530A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5388B71D2A7ACDDA004B530A /* StorageManager.swift */; };
 		53A724712A6BB9260098A3B3 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724702A6BB9260098A3B3 /* ProfileEditViewController.swift */; };
 		53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */; };
 		53A724EE2A717BC60098A3B3 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */; };
@@ -87,7 +86,6 @@
 		534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentsTableViewCell.swift; sourceTree = "<group>"; };
 		534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotificationViewController.swift; sourceTree = "<group>"; };
 		534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
-		5388B71D2A7ACDDA004B530A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		53A724702A6BB9260098A3B3 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				534F55212A603B1000A565F8 /* WeDoItTogether */,
-				5388B71D2A7ACDDA004B530A /* StorageManager.swift */,
 				534F55202A603B1000A565F8 /* Products */,
 				B11477302A69331E003AB9C7 /* Frameworks */,
 			);
@@ -433,7 +430,6 @@
 				53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */,
 				5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */,
 				B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */,
-				5388B71E2A7ACDDA004B530A /* StorageManager.swift in Sources */,
 				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
 				4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */,
 				53A724F02A717BE70098A3B3 /* PasswordEditView.swift in Sources */,
@@ -477,7 +473,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */ß
+/* Begin PBXVariantGroup section */
 		534F552D2A603B1200A565F8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
