@@ -93,6 +93,7 @@ extension ProfileViewController {
         self.showAlert(message: "로그아웃 하시겠습니까?", isCancelButton: true) {
             do {
               try Auth.auth().signOut()
+//                UserDefaultsData.shared.removeAll()
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(UINavigationController(rootViewController: LoginViewController()), animated: true)
             } catch let signOutError as NSError {
               print ("Error signing out: %@", signOutError)
