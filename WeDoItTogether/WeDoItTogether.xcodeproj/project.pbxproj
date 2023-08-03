@@ -58,6 +58,7 @@
 		B1E5CB8E2A70B3F4004317EE /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8D2A70B3F4004317EE /* FirebaseDatabaseSwift */; };
 		B1E5CB902A70B3F4004317EE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8F2A70B3F4004317EE /* FirebaseStorage */; };
 		B1E5CB932A70B406004317EE /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB922A70B406004317EE /* SwiftSMTP */; };
+		B1E87CD32A7C175500F31624 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E87CD22A7C175500F31624 /* TestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
 		B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		B1E5CB842A70A989004317EE /* MailCore2_bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCore2_bridge.h; sourceTree = "<group>"; };
+		B1E87CD22A7C175500F31624 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +315,7 @@
 				B11477282A6909FF003AB9C7 /* User.swift */,
 				B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */,
 				4B21D3382A6A172F00352B29 /* HomeTestModel.swift */,
+				B1E87CD22A7C175500F31624 /* TestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				B114772D2A690AAC003AB9C7 /* UIViewController+Extensions.swift in Sources */,
 				53A724712A6BB9260098A3B3 /* ProfileEditViewController.swift in Sources */,
 				53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */,
+				B1E87CD32A7C175500F31624 /* TestModel.swift in Sources */,
 				5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */,
 				B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */,
 				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
