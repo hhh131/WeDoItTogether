@@ -54,7 +54,6 @@ extension LoginViewController {
             if authResult != nil {
                 //SceneDelegate changeRootView 호출
                 self.setUserData()
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
 
             } else {
                 self.showAlert(message: "등록되지 않은 정보입니다.", yesAction: nil)
@@ -115,6 +114,7 @@ extension LoginViewController {
             
             UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
             
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(TabBarController(), animated: true)
             
         }) { error in
           print(error.localizedDescription)
