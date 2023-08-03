@@ -12,7 +12,7 @@ import FirebaseCore
 
 class ProfileViewController: UIViewController {
     let profileView = ProfileView()
-    var user: User?
+    var user = UserDefaultsData.shared.getUser()
     
     convenience init(title: String) {
         self.init()
@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController {
     
     // 사용자 정보 불러오기
     func setProfileData(){
-        user = self.fetchUser()
         self.profileView.emailLabel.text = self.user?.email
         self.profileView.nameLabel.text = self.user?.name
     }

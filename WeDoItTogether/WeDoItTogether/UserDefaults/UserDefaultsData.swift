@@ -10,6 +10,7 @@ import Foundation
 class UserDefaultsData {
     enum Key: String, CaseIterable {
         case latitude, longitude
+        case email, name, password
     }
     
     static let shared: UserDefaultsData = {
@@ -32,5 +33,26 @@ class UserDefaultsData {
         let latitude = UserDefaults.standard.double(forKey: Key.latitude.rawValue)
         let longitude = UserDefaults.standard.double(forKey: Key.longitude.rawValue)
         return CurrentLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    func setUser(email: String, name: String, password: String) {
+        UserDefaults.standard.setValue(email, forKey: Key.email.rawValue)
+        UserDefaults.standard.setValue(name, forKey: Key.name.rawValue)
+        UserDefaults.standard.setValue(password, forKey: Key.password.rawValue)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getUser() -> User? {
+        guard let email = UserDefaults.standard.string(forKey: Key.email.rawValue) else {
+            return nil
+        }
+        guard let name = UserDefaults.standard.string(forKey: Key.name.rawValue) else {
+            return nil
+        }
+        guard let password = UserDefaults.standard.string(forKey: Key.password.rawValue) else {
+            return nil
+        }
+        
+        return User(email: email, name: name, password: password)
     }
 }

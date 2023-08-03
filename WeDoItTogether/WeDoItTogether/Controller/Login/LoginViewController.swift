@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
 
     let loginView = LoginView()
     var errorMessage: String = ""
-    var user: User?
     
     override func loadView() {
         super.loadView()
@@ -96,24 +95,26 @@ extension LoginViewController {
     }
     
     // 사용자 정보 불러오기
-    func setUserData(){
-        let ref: DatabaseReference!
-        ref = Database.database().reference()
+    func setUserData() {
+        let ref = Database.database().reference()
 //        var safeEmail = loginView.emailTextField.text!.replacingOccurrences(of: ".", with: "-")
 //        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
 //        ref.child("users").child("\(safeEmail)")
         
         //임시 데이터
-        ref.child("users").child("Test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child("users").child("test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? NSDictionary else{
                 return
             }
             
-            self.user = User(email: value["email"] as? String ?? "",
-                             name: value["name"] as? String ?? "Name",
-                             password: value["password"] as? String ?? "")
-            self.saveUser(user: self.user)
+            print("\(value)")
+            let user = User(email: value["email"] as? String ?? "",
+                                        name: value["name"] as? String ?? "Name",
+                                        password: value["password"] as? String ?? "")
+            
+            UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
+            
             
         }) { error in
           print(error.localizedDescription)

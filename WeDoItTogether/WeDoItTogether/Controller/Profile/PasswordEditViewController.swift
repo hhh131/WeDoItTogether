@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class PasswordEditViewController: UIViewController {
     let passwordEditView = PasswordEditView()
-    var user: User?
+    var user = UserDefaultsData.shared.getUser()
     
     convenience init(title: String) {
         self.init()
@@ -26,7 +26,7 @@ class PasswordEditViewController: UIViewController {
         super.viewDidLoad()
         setTextFields()
         setButtons()
-        user = self.fetchUser()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -77,13 +77,18 @@ extension PasswordEditViewController {
         guard validate() else {
             return
         }
-        let ref: DatabaseReference!
-        ref = Database.database().reference()
-        let name: String = user?.name ?? ""
-        let email: String = user?.email ?? ""
-        let newPassword: String = passwordEditView.newPasswordTextField.text!
-        self.user = User(email: email, name: name, password: newPassword)
-        self.saveUser(user: self.user)
+        
+        let ref = Database.database().reference()
+        guard let name: String = user?.name else {
+            return
+        }
+        guard let email: String = user?.email else {
+            return
+        }
+        guard let newPassword: String = passwordEditView.newPasswordTextField.text else {
+            return
+        }
+        UserDefaultsData.shared.setUser(email: email, name: name, password: newPassword)
         
         guard let userId = user?.userId else { return }
         ref.child("users").child(userId).updateChildValues(["password": newPassword])
