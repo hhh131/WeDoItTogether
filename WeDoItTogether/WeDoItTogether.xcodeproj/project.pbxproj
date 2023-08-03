@@ -30,7 +30,6 @@
 		534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */; };
 		534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */; };
 		534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */; };
-		5388B7202A7C1786004B530A /* dd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5388B71F2A7C1786004B530A /* dd.swift */; };
 		5388B7242A7C1EE5004B530A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5388B7232A7C1EE5004B530A /* StorageManager.swift */; };
 		53A724712A6BB9260098A3B3 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724702A6BB9260098A3B3 /* ProfileEditViewController.swift */; };
 		53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */; };
@@ -90,7 +89,6 @@
 		534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationContentsTableViewCell.swift; sourceTree = "<group>"; };
 		534F55EB2A68DE2200A565F8 /* SystemNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotificationViewController.swift; sourceTree = "<group>"; };
 		534F55ED2A68DE2900A565F8 /* UserNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationViewController.swift; sourceTree = "<group>"; };
-		5388B71F2A7C1786004B530A /* dd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dd.swift; sourceTree = "<group>"; };
 		5388B7232A7C1EE5004B530A /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		53A724702A6BB9260098A3B3 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
@@ -460,9 +458,7 @@
 				B109F9202A605C5B002E870C /* HomeView.swift in Sources */,
 				4B46DB102A6D463B00EA7903 /* AddContentViewController.swift in Sources */,
 				534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */,
-				B1E87CD52A7C194000F31624 /* zz.swift in Sources */,
 				534F55372A603B9400A565F8 /* LoginView.swift in Sources */,
-				5388B7202A7C1786004B530A /* dd.swift in Sources */,
 				B109F91A2A605A97002E870C /* TabBarController.swift in Sources */,
 				B1E87CD72A7C26BD00F31624 /* HeyYubin.swift in Sources */,
 				4BDD0FDC2A6A19E80065D5C1 /* AddContentView.swift in Sources */,
