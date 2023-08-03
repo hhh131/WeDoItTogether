@@ -104,7 +104,7 @@ extension LoginViewController {
 //        ref.child("users").child("\(safeEmail)")
         
         //임시 데이터
-        ref.child("users").child("Test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child("users").child("test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? NSDictionary else{
                 return
