@@ -93,7 +93,9 @@ extension PasswordEditViewController {
         guard let userId = user?.userId else { return }
         ref.child("users").child(userId).updateChildValues(["password": newPassword])
         
-        self.navigationController?.popViewController(animated: true)
+        self.showAlert(message: "패스워드 설정이 완료되었습니다.") {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func validate() -> Bool {
