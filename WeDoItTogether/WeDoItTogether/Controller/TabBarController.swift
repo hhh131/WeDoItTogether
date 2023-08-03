@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
         
         //홈뷰 네비게이션 컨트롤러로 생성
         let homeVC = UINavigationController.init(rootViewController: HomeViewController(title: "Home"))
-        let chattingVC = UINavigationController.init(rootViewController: ChattingViewController(title: "Chatting"))
+        let chattingVC = UINavigationController.init(rootViewController: ChatListViewController(title: "Chatting"))
         let notificationVC = UINavigationController.init(rootViewController: NotificationViewController(title: "Notification"))
         let profileVC = UINavigationController.init(rootViewController: ProfileViewController(title: "Profile"))
         
