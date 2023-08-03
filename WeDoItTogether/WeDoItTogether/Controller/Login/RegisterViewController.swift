@@ -161,19 +161,6 @@ extension RegisterViewController {
             .child("\(newUser.userId)")
             .setValue(newUser.asDictionary())
         
-        //프로필 이미지 저장 (기본 이미지 저장)
-        let defaultImage = UIImage(named: "blankProfile")!
-        var data = Data()
-        data = defaultImage.jpegData(compressionQuality: 0.8)!
-        StorageManager.shared.uploadProfilePicture(with: data, filePath: "images/\(newUser.profilePictureFileName)") { result in
-            switch result{
-            case .success(let downloadUrl):
-                UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
-                print(downloadUrl)
-            case .failure(let error):
-                print("Storage manager error: \(error)")
-            }
-        }
     }
     
     
