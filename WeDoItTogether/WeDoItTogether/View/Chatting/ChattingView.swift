@@ -27,7 +27,7 @@ class ChattingView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .white
         
         return collectionView
     }()
