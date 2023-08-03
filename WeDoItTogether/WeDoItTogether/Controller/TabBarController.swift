@@ -39,8 +39,8 @@ class TabBarController: UITabBarController {
         //탭바 아이콘 설정
         let homeTabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
         let chattingTabBarItem = UITabBarItem(title: "Chatting", image: UIImage(systemName: "message.fill"), tag: 1)
-        let notificationTabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "bell.fill"), tag: 2)
-        let profileTabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "person.fill"), tag: 3)
+        let notificationTabBarItem = UITabBarItem(title: "Notification", image: UIImage(systemName: "bell.fill"), tag: 2)
+        let profileTabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 3)
         //탭바 아이콘 추가
         homeVC.tabBarItem = homeTabBarItem
         chattingVC.tabBarItem = chattingTabBarItem

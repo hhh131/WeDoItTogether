@@ -239,9 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				5388B7232A7C1EE5004B530A /* StorageManager.swift */,
+				B11477272A6909ED003AB9C7 /* Extensions */,
 				B109F92C2A60688D002E870C /* Others */,
 				B18B47CC2A7AC8D0006EC979 /* UserDefaults */,
-				B11477272A6909ED003AB9C7 /* Extensions */,
 				B11477262A6909E1003AB9C7 /* Model */,
 				B109F91C2A605AAA002E870C /* Controller */,
 				53479FF72A699EDE00645844 /* Cell */,
