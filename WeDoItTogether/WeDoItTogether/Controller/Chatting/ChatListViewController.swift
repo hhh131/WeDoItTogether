@@ -30,7 +30,7 @@ class ChatListViewController: UIViewController {
     }
 }
 
-extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ChatList.mockData.count

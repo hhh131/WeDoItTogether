@@ -21,17 +21,19 @@ class ChatListView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .white
         
         return collectionView
     }()
     
    
     func addViews() {
+     
         [collectionView].forEach { item in
             item.translatesAutoresizingMaskIntoConstraints = false
             addSubview(item)
