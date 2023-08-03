@@ -61,6 +61,7 @@
 		B1E5CB902A70B3F4004317EE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8F2A70B3F4004317EE /* FirebaseStorage */; };
 		B1E5CB932A70B406004317EE /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB922A70B406004317EE /* SwiftSMTP */; };
 		B1E87CD52A7C194000F31624 /* zz.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E87CD42A7C194000F31624 /* zz.swift */; };
+		B1E87CD72A7C26BD00F31624 /* HeyYubin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E87CD62A7C26BD00F31624 /* HeyYubin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		B1E5CB842A70A989004317EE /* MailCore2_bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCore2_bridge.h; sourceTree = "<group>"; };
 		B1E87CD42A7C194000F31624 /* zz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zz.swift; sourceTree = "<group>"; };
+		B1E87CD62A7C26BD00F31624 /* HeyYubin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeyYubin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 				B109F91B2A605AA1002E870C /* View */,
 				5388B71F2A7C1786004B530A /* dd.swift */,
 				B1E87CD42A7C194000F31624 /* zz.swift */,
+				B1E87CD62A7C26BD00F31624 /* HeyYubin.swift */,
 			);
 			path = WeDoItTogether;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				534F55372A603B9400A565F8 /* LoginView.swift in Sources */,
 				5388B7202A7C1786004B530A /* dd.swift in Sources */,
 				B109F91A2A605A97002E870C /* TabBarController.swift in Sources */,
+				B1E87CD72A7C26BD00F31624 /* HeyYubin.swift in Sources */,
 				4BDD0FDC2A6A19E80065D5C1 /* AddContentView.swift in Sources */,
 				534F55232A603B1000A565F8 /* AppDelegate.swift in Sources */,
 				B114772F2A6932C6003AB9C7 /* Encodable+Extensions.swift in Sources */,
