@@ -48,29 +48,4 @@ extension UIViewController {
         imageView.layer.borderColor = borderColor
         imageView.clipsToBounds = true
     }
-    
-    //userDefault에 저장된 유저정보 가져오기
-    func fetchUser() -> User? {
-        do {
-            if let data = UserDefaults.standard.object(forKey: "user") as? Data {
-                let decoder: JSONDecoder = JSONDecoder()
-                return try decoder.decode(User.self, from: data)
-            }
-        } catch {
-            print("UserDefaults로 부터 데이터 가져오기 실패")
-        }
-        return nil
-    }
-    
-    //userDefaults에 넣기
-    func saveUser(user: User?){
-        do {
-            let endcoder: JSONEncoder = JSONEncoder()
-            let data: Data = try endcoder.encode(user)
-
-            UserDefaults.standard.set(data, forKey: "user")
-        } catch {
-            print("JSON 생성 후 UserDefaults 실패")
-        }
-    }
 }

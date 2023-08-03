@@ -12,7 +12,7 @@ import FirebaseDatabase
 class ProfileEditViewController: UIViewController {
     let profileEditView = ProfileEditView()
     let imgPicker = UIImagePickerController()
-    var user: User?
+    var user = UserDefaultsData.shared.getUser()
     
     convenience init(title: String) {
         self.init()
@@ -54,7 +54,6 @@ class ProfileEditViewController: UIViewController {
     }
     
     func setTextField(){
-        user = self.fetchUser()
         profileEditView.nameTextField.text = user?.name
     }
 }
@@ -67,17 +66,15 @@ extension ProfileEditViewController{
             self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
             return
         }
-        let ref: DatabaseReference!
-        ref = Database.database().reference()
+        
+        let ref = Database.database().reference()
         let newName: String = profileEditView.nameTextField.text!
         let email: String = user?.email ?? ""
         let password: String = user?.password ?? ""
-        self.user = User(email: email, name: newName, password: password)
-        self.saveUser(user: self.user)
+        let user = User(email: email, name: newName, password: password)
+        UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
         
-        guard let userId = user?.userId else { return }
-        
-        ref.child("users").child(userId).updateChildValues(["name": newName])
+        ref.child("users").child(user.userId).updateChildValues(["name": newName])
         
         self.navigationController?.popViewController(animated: true)
     }

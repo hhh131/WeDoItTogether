@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrentLocation {
+struct CurrentLocation: Codable  {
     let latitude: Double
     let longitude: Double
 //    let latitude: Double = 37.566352778     //위도

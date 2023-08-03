@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 //메인탭바 컨트롤러
 class TabBarController: UITabBarController {
@@ -69,6 +70,7 @@ extension TabBarController: CLLocationManagerDelegate {
             print("위도: \(location.coordinate.latitude)")
             print("경도: \(location.coordinate.longitude)")
             UserDefaultsData.shared.setLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            saveUserLocation()
         }
         
         locationManager.stopUpdatingLocation()
@@ -120,6 +122,22 @@ extension TabBarController: CLLocationManagerDelegate {
         default:
             print("Default")
         }
+    }
+    
+    private func saveUserLocation() {
+        let user = UserDefaultsData.shared.getUser()
+        let currentLocation = UserDefaultsData.shared.getLocation()
+        let userLocation = CurrentLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+        
+        let ref = Database.database().reference()
+
+        guard let userId = user?.userId else {
+            return
+        }
+        ref.child("location")
+            .child(userId)
+            .setValue(userLocation.asDictionary())
+        
     }
 }
 
