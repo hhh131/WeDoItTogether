@@ -34,6 +34,11 @@
 		53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */; };
 		53A724EE2A717BC60098A3B3 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */; };
 		53A724F02A717BE70098A3B3 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724EF2A717BE70098A3B3 /* PasswordEditView.swift */; };
+		5458D50A2A7BBB5700C98C17 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D5082A7BBB5600C98C17 /* ChatListCell.swift */; };
+		5458D50B2A7BBB5700C98C17 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D5092A7BBB5600C98C17 /* ChattingCell.swift */; };
+		5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D50C2A7BBB7600C98C17 /* ChatListView.swift */; };
+		5458D50F2A7BBB7C00C98C17 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D50E2A7BBB7C00C98C17 /* ChatListViewController.swift */; };
+		5458D5112A7BBB9800C98C17 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D5102A7BBB9800C98C17 /* ChatList.swift */; };
 		548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */; };
 		5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */; };
 		B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B101A1BC2A681CEE00B92ECF /* RegisterView.swift */; };
@@ -85,6 +90,11 @@
 		53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		53A724EF2A717BE70098A3B3 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
+		5458D5082A7BBB5600C98C17 /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
+		5458D5092A7BBB5600C98C17 /* ChattingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
+		5458D50C2A7BBB7600C98C17 /* ChatListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		5458D50E2A7BBB7C00C98C17 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		5458D5102A7BBB9800C98C17 /* ChatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		548060872A696AF0000DFC56 /* ForgetPasswordVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVIew.swift; sourceTree = "<group>"; };
 		548060892A696B0C000DFC56 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		B101A1BC2A681CEE00B92ECF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -121,6 +131,8 @@
 		53479FF72A699EDE00645844 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				5458D5082A7BBB5600C98C17 /* ChatListCell.swift */,
+				5458D5092A7BBB5600C98C17 /* ChattingCell.swift */,
 				534F55E92A68DDF600A565F8 /* NotificationContentsTableViewCell.swift */,
 				4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */,
 				B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */,
@@ -151,6 +163,7 @@
 		53479FFA2A699F1300645844 /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				5458D50C2A7BBB7600C98C17 /* ChatListView.swift */,
 				534F55402A60724E00A565F8 /* ChattingView.swift */,
 			);
 			path = Chatting;
@@ -197,6 +210,7 @@
 		53479FFF2A699F5A00645844 /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				5458D50E2A7BBB7C00C98C17 /* ChatListViewController.swift */,
 				534F553C2A60721E00A565F8 /* ChattingViewController.swift */,
 			);
 			path = Chatting;
@@ -295,6 +309,7 @@
 		B11477262A6909E1003AB9C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5458D5102A7BBB9800C98C17 /* ChatList.swift */,
 				B11477282A6909FF003AB9C7 /* User.swift */,
 				B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */,
 				4B21D3382A6A172F00352B29 /* HomeTestModel.swift */,
@@ -413,6 +428,7 @@
 				B114772D2A690AAC003AB9C7 /* UIViewController+Extensions.swift in Sources */,
 				53A724712A6BB9260098A3B3 /* ProfileEditViewController.swift in Sources */,
 				53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */,
+				5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */,
 				B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */,
 				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
 				4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */,
@@ -425,7 +441,9 @@
 				534F55272A603B1000A565F8 /* LoginViewController.swift in Sources */,
 				B18B47D02A7AC98A006EC979 /* CurrentLocation.swift in Sources */,
 				5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */,
+				5458D50B2A7BBB5700C98C17 /* ChattingCell.swift in Sources */,
 				B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */,
+				5458D50F2A7BBB7C00C98C17 /* ChatListViewController.swift in Sources */,
 				B109F9202A605C5B002E870C /* HomeView.swift in Sources */,
 				4B46DB102A6D463B00EA7903 /* AddContentViewController.swift in Sources */,
 				534F55EA2A68DDF600A565F8 /* NotificationContentsTableViewCell.swift in Sources */,
@@ -440,6 +458,7 @@
 				53A724EE2A717BC60098A3B3 /* PasswordEditViewController.swift in Sources */,
 				534F553D2A60721E00A565F8 /* ChattingViewController.swift in Sources */,
 				534F553B2A60718600A565F8 /* ProfileViewController.swift in Sources */,
+				5458D50A2A7BBB5700C98C17 /* ChatListCell.swift in Sources */,
 				534F55EE2A68DE2900A565F8 /* UserNotificationViewController.swift in Sources */,
 				534F55E82A68DD3E00A565F8 /* UIView+Extensions.swift in Sources */,
 				534F55EC2A68DE2200A565F8 /* SystemNotificationViewController.swift in Sources */,
@@ -447,6 +466,7 @@
 				4B46DB122A6D551100EA7903 /* HomeViewContentCell.swift in Sources */,
 				534F55252A603B1000A565F8 /* SceneDelegate.swift in Sources */,
 				B11477292A6909FF003AB9C7 /* User.swift in Sources */,
+				5458D5112A7BBB9800C98C17 /* ChatList.swift in Sources */,
 				4BDD0FE02A6A20230065D5C1 /* DetailContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
