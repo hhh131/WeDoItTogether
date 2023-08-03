@@ -17,4 +17,7 @@ struct User: Codable  {
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         return safeEmail
     }
+    var profilePictureFileName : String {
+        return "\(userId)_profile_picture.png"
+    }
 }
