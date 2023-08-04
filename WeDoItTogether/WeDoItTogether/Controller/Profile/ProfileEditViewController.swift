@@ -13,6 +13,7 @@ class ProfileEditViewController: UIViewController {
     let profileEditView = ProfileEditView()
     let imgPicker = UIImagePickerController()
     var user = UserDefaultsData.shared.getUser()
+    var newImage:UIImage?
     
     convenience init(title: String) {
         self.init()
@@ -26,6 +27,7 @@ class ProfileEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imgPicker.delegate = self
+        imgPicker.allowsEditing = true
         setButtons()
         setImageView()
         setTextField()
@@ -50,7 +52,20 @@ class ProfileEditViewController: UIViewController {
         let profileImage = UITapGestureRecognizer(target: self, action: #selector(touchUpProfileImageView))
         profileEditView.profilePhotoImageView.isUserInteractionEnabled = true
         profileEditView.profilePhotoImageView.addGestureRecognizer(profileImage)
-
+        
+        guard let fileName = user?.profilePictureFileName else { return }
+        let path = "images/images/" + fileName
+        
+        DispatchQueue.main.async{
+            StorageManager.shared.downloadURL(for: path) { [weak self] result in
+                switch result {
+                case .success(let url):
+                    StorageManager.shared.downloadImage(imageView: (self?.profileEditView.profilePhotoImageView)!, url: url)
+                case .failure(let error):
+                    print("Failed to get download url:\(error)")
+                }
+            }
+        }
     }
     
     func setTextField(){
@@ -66,6 +81,23 @@ extension ProfileEditViewController{
             self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
             return
         }
+        //이미지 변경 저장
+        if let image = newImage {
+            guard let filePath = user?.profilePictureFileName else {
+                return
+            }
+            var data = Data()
+            data = image.jpegData(compressionQuality: 0.8)!
+            StorageManager.shared.uploadProfilePicture(with: data, filePath: "images/\(filePath)") { result in
+                switch result{
+                case .success(let downloadUrl):
+                    UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                    print(downloadUrl)
+                case .failure(let error):
+                    print("Storage manager error: \(error)")
+                }
+            }
+        }
         
         let ref = Database.database().reference()
         let newName: String = profileEditView.nameTextField.text!
@@ -75,8 +107,9 @@ extension ProfileEditViewController{
         UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
         
         ref.child("users").child(user.userId).updateChildValues(["name": newName])
-        
-        self.navigationController?.popViewController(animated: true)
+        self.showAlert(message: "변경사항이 저장되었습니다.") {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     //비밀 번호 변경 버튼
@@ -129,8 +162,10 @@ extension ProfileEditViewController{
 //MARK: - ImagePicker Delegate
 extension ProfileEditViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             profileEditView.profilePhotoImageView.image = image
+            newImage = image
+            
             print(info)
             
         }
