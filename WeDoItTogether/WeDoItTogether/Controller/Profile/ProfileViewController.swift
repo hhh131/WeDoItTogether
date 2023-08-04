@@ -53,28 +53,20 @@ class ProfileViewController: UIViewController {
         guard let fileName = user?.profilePictureFileName else { return }
         let path = "images/images/" + fileName
         
-        StorageManager.shared.downloadURL(for: path) { [weak self] result in
-            switch result {
-            case .success(let url):
-                self?.downloadImage(imageView: (self?.profileView.profilePhotoImageView)!, url: url)
-            case .failure(let error):
-                print("Failed to get download url:\(error)")
+        DispatchQueue.main.async{
+            StorageManager.shared.downloadURL(for: path) { [weak self] result in
+                switch result {
+                case .success(let url):
+                    StorageManager.shared.downloadImage(imageView: (self?.profileView.profilePhotoImageView)!, url: url)
+                case .failure(let error):
+                    print("Failed to get download url:\(error)")
+                }
             }
         }
+        
     }
     
-    // 저장된 이미지 불러오기
-    func downloadImage(imageView: UIImageView, url: URL){
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                let image = UIImage(data: data)
-                imageView.image = image
-            }
-        }.resume()
-    }
+    
 }
 
 //MARK: - 버튼 addTarget

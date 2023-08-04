@@ -11,7 +11,8 @@ class ProfileEditView: UIView {
     
     lazy var profilePhotoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "blankProfile")
+        imageView.image = UIImage(systemName: "rays")
+        imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         
         return imageView
