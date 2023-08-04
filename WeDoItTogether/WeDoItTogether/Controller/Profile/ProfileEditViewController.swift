@@ -115,7 +115,7 @@ extension ProfileEditViewController{
         let email: String = user?.email ?? ""
         let password: String = user?.password ?? ""
         let user = User(email: email, name: newName, password: password)
-        UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
+        UserDefaultsData.shared.setUser(email: email, name: newName, password: password)
         
         ref.child("users").child(user.userId).updateChildValues(["name": newName])
         self.showAlert(message: "변경사항이 저장되었습니다.") {

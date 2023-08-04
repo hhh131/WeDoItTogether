@@ -13,7 +13,7 @@ import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     let profileView = ProfileView()
-    var user = UserDefaultsData.shared.getUser()
+    var user: User?
     
     convenience init(title: String) {
         self.init()
@@ -46,6 +46,7 @@ class ProfileViewController: UIViewController {
     
     // 사용자 정보 불러오기
     func setProfileData(){
+        user = UserDefaultsData.shared.getUser()
         self.profileView.emailLabel.text = self.user?.email
         self.profileView.nameLabel.text = self.user?.name
         
