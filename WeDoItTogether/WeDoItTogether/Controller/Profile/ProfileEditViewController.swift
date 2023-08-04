@@ -44,7 +44,11 @@ class ProfileEditViewController: UIViewController {
     }
     
     func setButtons(){
+        //저장 버튼
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(touchUpSavebutton))
+        //back 버튼
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(touchUpBackButton))
+        //비밀번호 변경 버튼
         profileEditView.editPasswordButton.addTarget(self, action: #selector(touchUpEditPasswordButton), for: .touchUpInside)
     }
     
@@ -75,6 +79,13 @@ class ProfileEditViewController: UIViewController {
 
 //MARK: - Button AddTarget
 extension ProfileEditViewController{
+    //back 버튼
+    @objc func touchUpBackButton(_ sender: UIBarButtonItem){
+        self.showAlert(message: "프로필 편집을 취소하시겠습니까? 변경사항은 저장되지 않습니다.", isCancelButton: true) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     //저장 버튼
     @objc func touchUpSavebutton(_ sender: UIBarButtonItem){
         guard !profileEditView.nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
