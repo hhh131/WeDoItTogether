@@ -10,7 +10,7 @@ import UIKit
 class ProfileView: UIView {
     lazy var profilePhotoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.fill")
+        imageView.image = UIImage(systemName: "rays")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         

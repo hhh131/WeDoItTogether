@@ -53,12 +53,23 @@ final class StorageManager {
         let reference = storage.child(path)
         reference.downloadURL { url, error in
             guard let url = url, error == nil else {
-                print(error)
-                print("------------------------------------")
                 completion(.failure(StorageErrors.failedToGetDownloadUrl))
                 return
             }
             completion(.success(url))
         }
+    }
+    
+    // 저장된 이미지 불러오기
+    public func downloadImage(imageView: UIImageView, url: URL){
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                imageView.image = image
+            }
+        }.resume()
     }
 }
