@@ -13,6 +13,7 @@ struct Item: Encodable {
     var location: String
     var memo: String
     var members: [String]
+    var emails: [String]
 }
 
 var dataSource: [Item] = [

@@ -48,8 +48,8 @@ extension LoginViewController {
 //            return
 //        }
         //MARK: - 임시 유저 데이터
-        let email: String = "test2@email.com"
-        let password: String = "qqqq1111"
+        let email: String = "bangtori@naver.com"
+        let password: String = "aaaaaaaa1"
         Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
             if authResult != nil {
                 //SceneDelegate changeRootView 호출

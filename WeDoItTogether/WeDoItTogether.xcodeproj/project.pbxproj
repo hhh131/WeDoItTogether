@@ -111,7 +111,6 @@
 		B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
 		B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
 		B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
-		B1E5CB842A70A989004317EE /* MailCore2_bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailCore2_bridge.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +297,6 @@
 		B109F92C2A60688D002E870C /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				B1E5CB842A70A989004317EE /* MailCore2_bridge.h */,
 				B109F92D2A6068D3002E870C /* GoogleService-Info.plist */,
 				534F55222A603B1000A565F8 /* AppDelegate.swift */,
 				534F55242A603B1000A565F8 /* SceneDelegate.swift */,

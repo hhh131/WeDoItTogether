@@ -89,7 +89,7 @@ class HomeViewContentCell: UICollectionViewCell {
             memoLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
             
             membersLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            membersLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: padding + 5)
+            membersLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: padding)
         ])
     }
 }
