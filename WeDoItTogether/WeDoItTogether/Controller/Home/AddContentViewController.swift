@@ -9,6 +9,7 @@ class AddContentViewController: UIViewController {
     
     weak var delegate: AddContentDelegate?
     
+    var user = UserDefaultsData.shared.getUser()
     let contentView = AddContentView()
     var testModel = dataSource
     
@@ -34,17 +35,17 @@ class AddContentViewController: UIViewController {
         let locationText = contentView.locationTextField.text ?? ""
         let memoText = contentView.memoTextField.text ?? ""
         let dateString = contentView.dateResultLabel.text ?? ""
-
-        let newItem = Item(title: titleText, date: dateString, location: locationText, memo: memoText, members: [])
+        
+        let newItem = Item(title: titleText, date: dateString, location: locationText, memo: memoText, members: [self.user?.name ?? ""], emails: [self.user?.email ?? ""])
         let newItemDictionary = newItem.asDictionary()
         
         let database = Database.database().reference()
         let newItemRef = database.child("items").childByAutoId()
-
+        
         newItemRef.setValue(newItemDictionary)
-
+        
         delegate?.didSaveItem(newItem)
-
+        
         self.navigationController?.popViewController(animated: true)
     }
     

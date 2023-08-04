@@ -13,6 +13,8 @@ class HomeViewController: UIViewController, AddContentDelegate {
     let homeView = HomeView()
     var testModel = dataSource
     
+    var user = UserDefaultsData.shared.getUser()
+    
     convenience init(title: String) {
         self.init()
         self.title = title
@@ -38,7 +40,6 @@ class HomeViewController: UIViewController, AddContentDelegate {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    //
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = false
@@ -56,14 +57,8 @@ class HomeViewController: UIViewController, AddContentDelegate {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    //안쓰는 함수는 지우는 게 좋지 않을까여~?
-    @objc private func dismissNewPostVC() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @objc private func getDatabaseInfo() {
         let ref = Database.database().reference()
-        
         let itemsRef = ref.child("items")
         
         itemsRef.observeSingleEvent(of: .value) { (snapshot) in
@@ -73,11 +68,14 @@ class HomeViewController: UIViewController, AddContentDelegate {
                        let title = itemInfo["title"] as? String,
                        let location = itemInfo["location"] as? String,
                        let memo = itemInfo["memo"] as? String,
-                       let date = itemInfo["date"] as? String {
-                       let members = itemInfo["members"] as? [String] ?? []
+                       let date = itemInfo["date"] as? String,
+                       let members = itemInfo["members"] as? [String],
+                       let emails = itemInfo["emails"] as? [String] {
                         
-                        let item = Item(title: title, date: date, location: location, memo: memo, members: members)
-                       self.testModel.append(item)
+                            if emails.contains(self.user?.email ?? "") {
+                                let item = Item(title: title, date: date, location: location, memo: memo, members: members, emails: emails)
+                                self.testModel.append(item)
+                            }
                     }
                 }
                 

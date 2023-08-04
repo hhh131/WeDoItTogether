@@ -12,6 +12,7 @@ class DetailContentViewController: UIViewController, MKMapViewDelegate {
     
     let detailContentView = DetailContentView()
     var item: Item?
+    var user = UserDefaultsData.shared.getUser()
     
     let userLocation = UserDefaultsData.shared.getLocation()
     
@@ -22,7 +23,7 @@ class DetailContentViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        barButton()
         updateUILabel()
         configureTableView()
     }
@@ -35,11 +36,23 @@ class DetailContentViewController: UIViewController, MKMapViewDelegate {
         detailContentView.membersLabel.text = membersString
     }
     
+    func barButton() {
+        let joinButton = UIBarButtonItem(title: "약속 참가", style: .plain, target: self, action: #selector(joinButtonClicked))
+        navigationItem.rightBarButtonItem = joinButton
+    }
+    
     private func configureTableView() {
         detailContentView.collectionView.register(MapCollectionViewCell.self, forCellWithReuseIdentifier: MapCollectionViewCell.identifier)
         detailContentView.collectionView.dataSource = self
         detailContentView.collectionView.delegate = self
     }
+    
+    
+    @objc private func joinButtonClicked() {
+        print("hello world")
+    }
+    
+    
 }
 
 //MARK: - 컬렉션뷰 관련
