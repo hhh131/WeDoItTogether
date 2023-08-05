@@ -138,7 +138,7 @@ extension ProfileEditViewController{
     }
 
     @objc func touchUpProfileImageView(){
-        let alert =  UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "앨범에서 가져오기", style: .default) { (action) in self.openLibrary() }
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
             guard (try? self.openCamera()) != nil else{
