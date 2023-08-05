@@ -35,6 +35,7 @@
 		53A724732A6BB98C0098A3B3 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */; };
 		53A724EE2A717BC60098A3B3 /* PasswordEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */; };
 		53A724F02A717BE70098A3B3 /* PasswordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A724EF2A717BE70098A3B3 /* PasswordEditView.swift */; };
+		53AB0DCC2A7EC1C0004D04C0 /* UNUserNotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB0DCB2A7EC1C0004D04C0 /* UNUserNotificationCenter+Extensions.swift */; };
 		5458D50A2A7BBB5700C98C17 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D5082A7BBB5600C98C17 /* ChatListCell.swift */; };
 		5458D50B2A7BBB5700C98C17 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D5092A7BBB5600C98C17 /* ChattingCell.swift */; };
 		5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5458D50C2A7BBB7600C98C17 /* ChatListView.swift */; };
@@ -92,6 +93,7 @@
 		53A724722A6BB98C0098A3B3 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		53A724ED2A717BC60098A3B3 /* PasswordEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditViewController.swift; sourceTree = "<group>"; };
 		53A724EF2A717BE70098A3B3 /* PasswordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEditView.swift; sourceTree = "<group>"; };
+		53AB0DCB2A7EC1C0004D04C0 /* UNUserNotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		5458D5082A7BBB5600C98C17 /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		5458D5092A7BBB5600C98C17 /* ChattingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
 		5458D50C2A7BBB7600C98C17 /* ChatListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				B114772C2A690AAC003AB9C7 /* UIViewController+Extensions.swift */,
 				B114772E2A6932C5003AB9C7 /* Encodable+Extensions.swift */,
 				534F55E72A68DD3E00A565F8 /* UIView+Extensions.swift */,
+				53AB0DCB2A7EC1C0004D04C0 /* UNUserNotificationCenter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				534F55232A603B1000A565F8 /* AppDelegate.swift in Sources */,
 				B114772F2A6932C6003AB9C7 /* Encodable+Extensions.swift in Sources */,
 				B114772B2A690A23003AB9C7 /* String+Extensions.swift in Sources */,
+				53AB0DCC2A7EC1C0004D04C0 /* UNUserNotificationCenter+Extensions.swift in Sources */,
 				4BF7A0092A6CE9BC004F5C36 /* HomeViewController.swift in Sources */,
 				B101A1C02A681D0D00B92ECF /* RegisterViewController.swift in Sources */,
 				53A724EE2A717BC60098A3B3 /* PasswordEditViewController.swift in Sources */,
