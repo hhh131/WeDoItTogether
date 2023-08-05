@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 
 class AddContentView: UIView {
@@ -16,6 +17,13 @@ class AddContentView: UIView {
     var locationText: String = ""
     var memoText: String = ""
     var dateString: String = ""
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = true
+        
+        return scrollView
+    }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -80,17 +88,31 @@ class AddContentView: UIView {
         return label
     }()
     
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+    lazy var mapView: MKMapView = {
+        let view = MKMapView()
+        view.backgroundColor = .blue
+        view.layer.cornerRadius = 20
+        view.layer.shadowRadius = 3
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        collectionView.isScrollEnabled = false
-        
-        return collectionView
+        return view
     }()
+    
+    lazy var compassButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "scope"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(compassButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
+    
+//    lazy var markerButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setImage(UIImage(systemName: "handpoint.down.fill"), for: .normal)
+//        button.tintColor = .blue
+//
+//        return button
+//    }()
     
     lazy var memoLabel: UILabel = {
         let label = UILabel()
@@ -117,6 +139,7 @@ class AddContentView: UIView {
         self.backgroundColor = .white
         addViews()
         setLayoutConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -124,10 +147,17 @@ class AddContentView: UIView {
     }
     
     func addViews(){
-        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, collectionView, memoLabel, memoTextField, dateResultLabel]
+        
+        self.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        mapView.addSubview(compassButton)
+        compassButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, mapView, memoLabel, memoTextField, dateResultLabel]
             .forEach { item in
                 item.translatesAutoresizingMaskIntoConstraints = false
-                self.addSubview(item)
+                scrollView.addSubview(item)
             }
         
     }
@@ -137,7 +167,14 @@ class AddContentView: UIView {
         let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: padding + 5),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: padding + 5),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -174,14 +211,19 @@ class AddContentView: UIView {
             locationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             locationLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            collectionView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: padding - 5),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            collectionView.heightAnchor.constraint(equalToConstant: 400),
+            mapView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: padding - 5),
+            mapView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            mapView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            mapView.heightAnchor.constraint(equalToConstant: 400),
         ])
         
         NSLayoutConstraint.activate([
-            memoLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: padding + 5),
+            compassButton.trailingAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            compassButton.bottomAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
+        
+        NSLayoutConstraint.activate([
+            memoLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: padding + 5),
             memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             memoLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -191,12 +233,22 @@ class AddContentView: UIView {
             memoTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             memoTextField.heightAnchor.constraint(equalToConstant: 200),
         ])
+        
+        scrollView.contentSize = CGSize(width: self.bounds.width, height: 1000)
     }
     
     @objc func datePickerValueChanged(_ sender: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         dateResultLabel.text = formatter.string(from: sender.date)
+    }
+    
+    @objc func compassButtonTapped() {
+        mapView.setUserTrackingMode(.follow, animated: true)
+    }
+    
+    func setMapCenter(_ coordinate: CLLocationCoordinate2D) {
+        mapView.setCenter(coordinate, animated: true)
     }
     
 }
