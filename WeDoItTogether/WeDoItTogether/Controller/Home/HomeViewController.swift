@@ -72,10 +72,10 @@ class HomeViewController: UIViewController, AddContentDelegate {
                        let members = itemInfo["members"] as? [String],
                        let emails = itemInfo["emails"] as? [String] {
                         
-                            if emails.contains(self.user?.email ?? "") {
+//                            if emails.contains(self.user?.email ?? "") {
                                 let item = Item(title: title, date: date, location: location, memo: memo, members: members, emails: emails)
                                 self.testModel.append(item)
-                            }
+//                            }
                     }
                 }
                 

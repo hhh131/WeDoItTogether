@@ -17,7 +17,6 @@ class AddContentView: UIView {
     var memoText: String = ""
     var dateString: String = ""
     
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "약속 이름"
@@ -81,14 +80,16 @@ class AddContentView: UIView {
         return label
     }()
     
-    lazy var locationTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "장소 입력"
-        textField.borderStyle = .bezel
-        textField.font = .systemFont(ofSize: 20)
-        textField.backgroundColor = .white
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         
-        return textField
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        collectionView.isScrollEnabled = false
+        
+        return collectionView
     }()
     
     lazy var memoLabel: UILabel = {
@@ -123,67 +124,71 @@ class AddContentView: UIView {
     }
     
     func addViews(){
-        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, locationTextField, memoLabel, memoTextField, dateResultLabel]
+        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, collectionView, memoLabel, memoTextField, dateResultLabel]
             .forEach { item in
                 item.translatesAutoresizingMaskIntoConstraints = false
                 self.addSubview(item)
             }
+        
     }
     
     func setLayoutConstraints() {
+        
+        let padding: CGFloat = 10
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 25),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: padding + 5),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            titleTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            titleTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            titleTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding - 5),
+            titleTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            titleTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             titleTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            redTitleLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 5),
-            redTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            redTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            redTitleLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: padding - 5),
+            redTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            redTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
         
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 25),
-            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            dateLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: padding + 5),
+            dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             dateLabel.heightAnchor.constraint(equalToConstant: 50),
             
             dateResultLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
-            dateResultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            dateResultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            dateResultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            dateResultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             dateResultLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5),
-            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            datePicker.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: padding - 5),
+            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             datePicker.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
         ])
         
         NSLayoutConstraint.activate([
-            locationLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 25),
-            locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            locationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            locationLabel.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: padding + 5 ),
+            locationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            locationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             locationLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            locationTextField.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5),
-            locationTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            locationTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            locationTextField.heightAnchor.constraint(equalToConstant: 50),
+            collectionView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: padding - 5),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            collectionView.heightAnchor.constraint(equalToConstant: 400),
         ])
         
         NSLayoutConstraint.activate([
-            memoLabel.topAnchor.constraint(equalTo: locationTextField.bottomAnchor, constant: 25),
-            memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            memoLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: padding + 5),
+            memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             memoLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            memoTextField.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
-            memoTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            memoTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            memoTextField.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: padding - 5),
+            memoTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            memoTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             memoTextField.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
