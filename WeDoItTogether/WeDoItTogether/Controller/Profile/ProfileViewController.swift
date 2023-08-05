@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setButtons()
         setProfileData()
+        setNotificationToggle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,6 +68,23 @@ class ProfileViewController: UIViewController {
         
     }
     
+    // 알림 토글 상태 설정
+    func setNotificationToggle(){
+        UNUserNotificationCenter.current().getNotificationSettings { permission in
+            DispatchQueue.main.async {
+                switch permission.authorizationStatus {
+                case .notDetermined, .authorized,
+                        .ephemeral:
+                    self.profileView.notificationSwitch.isOn = true
+                case .denied, .provisional:
+                    self.profileView.notificationSwitch.isOn = false
+
+                @unknown default:
+                    self.profileView.notificationSwitch.isOn = false
+                }
+            }
+        }
+    }
     
 }
 
