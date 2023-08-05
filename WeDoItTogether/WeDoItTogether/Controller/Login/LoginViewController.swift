@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     let loginView = LoginView()
     var errorMessage: String = ""
     
+    var userEmail: String?
+    var userPassword: String?
+    
     override func loadView() {
         super.loadView()
         self.view = loginView
@@ -41,19 +44,22 @@ extension LoginViewController {
     
     //로그인버튼 클릭
     @objc func touchUpLoginButton(_ sender: UIButton) {
-//        let email: String = loginView.emailTextField.text!.description
-//        let password: String = loginView.passwordTextField.text!.description
-//        guard validate() else {
-//            resetTextField()
-//            return
-//        }
+        guard validate() else {
+            resetTextField()
+            return
+        }
         //MARK: - 임시 유저 데이터
-        let email: String = "bangtori@naver.com"
-        let password: String = "aaaaaaaa1"
-        Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
+//        let email: String = "bangtori@naver.com"
+//        let password: String = "aaaaaaaa1"
+        
+        guard let userEmail = userEmail, let userPassword = userPassword else {
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: userEmail, password: userPassword) {authResult, error in
             if authResult != nil {
                 //SceneDelegate changeRootView 호출
-                self.setUserData()
+                self.setUserData(userEmail: userEmail)
 
             } else {
                 self.showAlert(message: "등록되지 않은 정보입니다.", yesAction: nil)
@@ -68,15 +74,20 @@ extension LoginViewController {
         self.navigationController?.pushViewController(registerViewController, animated: true)
     }
     
+    //비밀번호 찾기 클릭
     @objc func touchUpForgetPasswordButton(_ sender: UIButton) {
         let forgetPasswordViewController = ForgetPasswordViewController()
         self.navigationController?.pushViewController(forgetPasswordViewController, animated: true)
     }
     
     private func validate() -> Bool{
-        guard !loginView.emailTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty,
-              !loginView.passwordTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty else {
-            self.showAlert(message: "필드를 모두 채워주세요", yesAction: nil)
+        guard let userEmail = loginView.emailTextField.text, !userEmail.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.showAlert(message: "이메일을 채워주세요", yesAction: nil)
+            return false
+        }
+        
+        guard let userPassword = loginView.passwordTextField.text, !userPassword.trimmingCharacters(in: .whitespaces).isEmpty else {
+            self.showAlert(message: "비밀번호를 채워주세요", yesAction: nil)
             return false
         }
         
@@ -85,6 +96,9 @@ extension LoginViewController {
             self.showAlert(message: "이메일 형식이 맞지 않습니다.", yesAction: nil)
             return false
         }
+        
+        self.userEmail = userEmail
+        self.userPassword = userPassword
         return true
     }
     
@@ -94,14 +108,15 @@ extension LoginViewController {
     }
     
     // 사용자 정보 불러오기
-    func setUserData() {
+    func setUserData(userEmail: String) {
         let ref = Database.database().reference()
-//        var safeEmail = loginView.emailTextField.text!.replacingOccurrences(of: ".", with: "-")
-//        safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
-//        ref.child("users").child("\(safeEmail)")
+        
+        var emailString = userEmail.replacingOccurrences(of: ".", with: "-")
+        emailString = emailString.replacingOccurrences(of: "@", with: "-")
         
         //임시 데이터
-        ref.child("users").child("test2-email-com").observeSingleEvent(of: .value, with: { snapshot in
+        ref.child("users")
+            .child(emailString).observeSingleEvent(of: .value, with: { snapshot in
           // Get user value
             guard let value = snapshot.value as? NSDictionary else{
                 return
