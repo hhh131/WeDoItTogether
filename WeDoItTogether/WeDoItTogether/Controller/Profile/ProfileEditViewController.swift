@@ -28,6 +28,7 @@ class ProfileEditViewController: UIViewController {
         super.viewDidLoad()
         imgPicker.delegate = self
         imgPicker.allowsEditing = true
+        profileEditView.nameTextField.delegate = self
         setButtons()
         setImageView()
         setTextField()
@@ -184,3 +185,18 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate,UINavigatio
     }
 }
 
+//MARK: - TextField Delegate
+extension ProfileEditViewController : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 백스페이스 처리
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        //글자수 제한
+        guard textField.text!.count < 10 else { return false }
+        return true
+    }
+}
