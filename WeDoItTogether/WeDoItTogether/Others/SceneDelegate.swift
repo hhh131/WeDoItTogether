@@ -10,14 +10,23 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var user = UserDefaultsData.shared.getUser()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let mainView = UINavigationController(rootViewController: LoginViewController())
-        window?.rootViewController = mainView
+        let loginView = UINavigationController(rootViewController: LoginViewController())
+        
+        let homeView = TabBarController()
+        
+        if user != nil {
+            print("로그인된 유저 : \(String(describing: user))")
+            window?.rootViewController = homeView
+        } else {
+            window?.rootViewController = loginView
+        }
         
         window?.makeKeyAndVisible()
     }
