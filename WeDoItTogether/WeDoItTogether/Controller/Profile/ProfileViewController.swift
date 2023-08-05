@@ -13,7 +13,7 @@ import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     let profileView = ProfileView()
-    var user = UserDefaultsData.shared.getUser()
+    var user: User?
     
     convenience init(title: String) {
         self.init()
@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setButtons()
         setProfileData()
+        setNotificationToggle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +47,7 @@ class ProfileViewController: UIViewController {
     
     // 사용자 정보 불러오기
     func setProfileData(){
+        user = UserDefaultsData.shared.getUser()
         self.profileView.emailLabel.text = self.user?.email
         self.profileView.nameLabel.text = self.user?.name
         
@@ -66,6 +68,23 @@ class ProfileViewController: UIViewController {
         
     }
     
+    // 알림 토글 상태 설정
+    func setNotificationToggle(){
+        UNUserNotificationCenter.current().getNotificationSettings { permission in
+            DispatchQueue.main.async {
+                switch permission.authorizationStatus {
+                case .notDetermined, .authorized,
+                        .ephemeral:
+                    self.profileView.notificationSwitch.isOn = true
+                case .denied, .provisional:
+                    self.profileView.notificationSwitch.isOn = false
+
+                @unknown default:
+                    self.profileView.notificationSwitch.isOn = false
+                }
+            }
+        }
+    }
     
 }
 
@@ -83,7 +102,7 @@ extension ProfileViewController {
         self.showAlert(message: "로그아웃 하시겠습니까?", isCancelButton: true) {
             do {
               try Auth.auth().signOut()
-//                UserDefaultsData.shared.removeAll()
+                UserDefaultsData.shared.removeAll()
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(UINavigationController(rootViewController: LoginViewController()), animated: true)
             } catch let signOutError as NSError {
               print ("Error signing out: %@", signOutError)

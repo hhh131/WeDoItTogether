@@ -7,14 +7,26 @@
 
 import UIKit
 import Firebase
+import NotificationCenter
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var userNotificationCenter: UNUserNotificationCenter?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = self
+        
+        let authrizationOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
+        userNotificationCenter?.requestAuthorization(completionHandler: { _, error in
+            if let error = error {
+                print("Error: notification authrization request \(error.localizedDescription)")
+            }
+        })
 
         return true
     }
@@ -36,3 +48,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .list, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+}
