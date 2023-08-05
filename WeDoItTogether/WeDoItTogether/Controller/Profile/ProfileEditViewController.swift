@@ -28,6 +28,7 @@ class ProfileEditViewController: UIViewController {
         super.viewDidLoad()
         imgPicker.delegate = self
         imgPicker.allowsEditing = true
+        profileEditView.nameTextField.delegate = self
         setButtons()
         setImageView()
         setTextField()
@@ -115,7 +116,7 @@ extension ProfileEditViewController{
         let email: String = user?.email ?? ""
         let password: String = user?.password ?? ""
         let user = User(email: email, name: newName, password: password)
-        UserDefaultsData.shared.setUser(email: user.email, name: user.name, password: user.password)
+        UserDefaultsData.shared.setUser(email: email, name: newName, password: password)
         
         ref.child("users").child(user.userId).updateChildValues(["name": newName])
         self.showAlert(message: "변경사항이 저장되었습니다.") {
@@ -138,7 +139,7 @@ extension ProfileEditViewController{
     }
 
     @objc func touchUpProfileImageView(){
-        let alert =  UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "앨범에서 가져오기", style: .default) { (action) in self.openLibrary() }
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in
             guard (try? self.openCamera()) != nil else{
@@ -184,3 +185,18 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate,UINavigatio
     }
 }
 
+//MARK: - TextField Delegate
+extension ProfileEditViewController : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 백스페이스 처리
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        //글자수 제한
+        guard textField.text!.count < 10 else { return false }
+        return true
+    }
+}

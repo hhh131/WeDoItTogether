@@ -1,12 +1,13 @@
 import UIKit
 import MapKit
 import Firebase
+import CoreLocation
 
 protocol AddContentDelegate: AnyObject {
     func didSaveItem(_ item: Item)
 }
 
-class AddContentViewController: UIViewController, MKMapViewDelegate {
+class AddContentViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     weak var delegate: AddContentDelegate?
     
@@ -14,15 +15,71 @@ class AddContentViewController: UIViewController, MKMapViewDelegate {
     let addContentView = AddContentView()
     var testModel = dataSource
     let userLocation = UserDefaultsData.shared.getLocation()
+    let locationManager = CLLocationManager()
+    var centerAnnotation: MKPointAnnotation!
+    var isMapMoving = false
     
     override func loadView() {
         self.view = addContentView
+        setLocationMapView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
-        configureCollectionView()
+        addContentView.mapView.delegate = self
+    }
+    
+    func setLocationMapView() {
+        
+        addContentView.mapView.showsUserLocation = true
+        addContentView.mapView.setUserTrackingMode(.follow, animated: true)
+        
+        let center = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        addContentView.mapView.setRegion(region, animated: true)
+        
+        centerAnnotation = MKPointAnnotation()
+        centerAnnotation.coordinate = center
+        addContentView.mapView.addAnnotation(centerAnnotation)
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === centerAnnotation {
+            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "CenterMarker")
+            
+            return annotationView
+        }
+        
+        return nil
+    }
+    
+    // 맵 이동 중
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        centerAnnotation.coordinate = mapView.centerCoordinate
+    }
+
+    // 맵 이동 시작
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        
+        if !isMapMoving {
+            UIView.animate(withDuration: 0.3) {
+                self.centerAnnotation.coordinate.latitude += 0.0005
+            }
+            isMapMoving = true
+        }
+    }
+    
+    // 맵 이동 끝
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if isMapMoving {
+            UIView.animate(withDuration: 0.3) {
+                self.centerAnnotation.coordinate.latitude -= 0.0005
+            }
+            isMapMoving = false
+        }
     }
     
     func setNavigation() {
@@ -33,15 +90,9 @@ class AddContentViewController: UIViewController, MKMapViewDelegate {
         self.navigationItem.rightBarButtonItem = saveButton
     }
     
-    private func configureCollectionView() {
-        addContentView.collectionView.register(MapCollectionViewCell.self, forCellWithReuseIdentifier: MapCollectionViewCell.identifier)
-        addContentView.collectionView.dataSource = self
-        addContentView.collectionView.delegate = self
-    }
-    
     @objc func saveButtonTapped() {
         let titleText = addContentView.titleTextField.text ?? ""
-//        let locationText = contentView.locationTextField.text ?? ""
+        //        let locationText = contentView.locationTextField.text ?? ""
         let memoText = addContentView.memoTextField.text ?? ""
         let dateString = addContentView.dateResultLabel.text ?? ""
         
@@ -62,31 +113,4 @@ class AddContentViewController: UIViewController, MKMapViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-}
-
-extension AddContentViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MapCollectionViewCell.identifier, for: indexPath) as? MapCollectionViewCell else { fatalError() }
-        cell.mapView.delegate = self
-        
-        let center = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        cell.mapView.setRegion(region, animated: true)
-        
-
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: Double = self.view.frame.width
-        
-        return CGSize(width: width, height: width)
-    }
 }
