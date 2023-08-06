@@ -97,6 +97,26 @@ class AddContentView: UIView {
         return view
     }()
     
+    lazy var searchTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "주소검색"
+        textField.borderStyle = .bezel
+        textField.font = .systemFont(ofSize: 20)
+        textField.backgroundColor = .white
+        textField.layer.borderWidth = 1.0
+        
+        return textField
+    }()
+    
+    lazy var searchButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
+    
     lazy var compassButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "scope"), for: .normal)
@@ -159,7 +179,10 @@ class AddContentView: UIView {
         self.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        [compassButton, loactionLabel]
+        searchTextField.addSubview(searchButton)
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        [compassButton, loactionLabel, searchTextField]
             .forEach { item in
                 item.translatesAutoresizingMaskIntoConstraints = false
                 mapView.addSubview(item)
@@ -234,6 +257,18 @@ class AddContentView: UIView {
         ])
         
         NSLayoutConstraint.activate([
+            searchTextField.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 20),
+            searchTextField.leadingAnchor.constraint(equalTo: mapView.leadingAnchor, constant: 20),
+            searchTextField.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -10),
+            searchTextField.heightAnchor.constraint(equalToConstant: 30),
+            
+            searchButton.topAnchor.constraint(equalTo: searchTextField.topAnchor),
+            searchButton.trailingAnchor.constraint(equalTo: searchTextField.trailingAnchor),
+            searchButton.widthAnchor.constraint(equalToConstant: 30),
+            searchButton.heightAnchor.constraint(equalToConstant: 30),
+        ])
+        
+        NSLayoutConstraint.activate([
             memoLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: padding + 5),
             memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
@@ -256,6 +291,10 @@ class AddContentView: UIView {
     
     @objc func compassButtonTapped() {
         mapView.setUserTrackingMode(.follow, animated: true)
+    }
+    
+    @objc func searchButtonTapped() {
+        //        mapView.setUserTrackingMode(.follow, animated: true)
     }
     
     func setMapCenter(_ coordinate: CLLocationCoordinate2D) {

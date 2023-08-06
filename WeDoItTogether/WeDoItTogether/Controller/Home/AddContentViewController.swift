@@ -94,8 +94,9 @@ class AddContentViewController: UIViewController, MKMapViewDelegate, CLLocationM
     func convertLocationToAddress(_ coordinate: CLLocationCoordinate2D) {
         let geocoder = CLGeocoder()
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let locale = Locale(identifier: "Ko-kr")
         
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+        geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in
             if let error = error {
                 print("Error reverse geocoding: \(error.localizedDescription)")
                 
