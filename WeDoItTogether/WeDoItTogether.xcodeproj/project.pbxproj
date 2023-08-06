@@ -10,6 +10,9 @@
 		4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21D3382A6A172F00352B29 /* HomeTestModel.swift */; };
 		4B46DB102A6D463B00EA7903 /* AddContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */; };
 		4B46DB122A6D551100EA7903 /* HomeViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */; };
+		4BD9D5D32A8008B700AA160F /* AddContentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9D5D22A8008B700AA160F /* AddContentMapViewController.swift */; };
+		4BD9D5D52A8008F300AA160F /* AddContentMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9D5D42A8008F300AA160F /* AddContentMapView.swift */; };
+		4BD9D5D72A80091B00AA160F /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9D5D62A80091B00AA160F /* CustomMarkerView.swift */; };
 		4BDD0FDC2A6A19E80065D5C1 /* AddContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD0FDB2A6A19E80065D5C1 /* AddContentView.swift */; };
 		4BDD0FDE2A6A1AB60065D5C1 /* DetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD0FDD2A6A1AB60065D5C1 /* DetailContentView.swift */; };
 		4BDD0FE02A6A20230065D5C1 /* DetailContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD0FDF2A6A20230065D5C1 /* DetailContentViewController.swift */; };
@@ -69,6 +72,9 @@
 		4B21D3382A6A172F00352B29 /* HomeTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestModel.swift; sourceTree = "<group>"; };
 		4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentViewController.swift; sourceTree = "<group>"; };
 		4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContentCell.swift; sourceTree = "<group>"; };
+		4BD9D5D22A8008B700AA160F /* AddContentMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentMapViewController.swift; sourceTree = "<group>"; };
+		4BD9D5D42A8008F300AA160F /* AddContentMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentMapView.swift; sourceTree = "<group>"; };
+		4BD9D5D62A80091B00AA160F /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
 		4BDD0FDB2A6A19E80065D5C1 /* AddContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentView.swift; sourceTree = "<group>"; };
 		4BDD0FDD2A6A1AB60065D5C1 /* DetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentView.swift; sourceTree = "<group>"; };
 		4BDD0FDF2A6A20230065D5C1 /* DetailContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContentViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +161,8 @@
 				B109F91F2A605C5B002E870C /* HomeView.swift */,
 				4BDD0FDB2A6A19E80065D5C1 /* AddContentView.swift */,
 				4BDD0FDD2A6A1AB60065D5C1 /* DetailContentView.swift */,
+				4BD9D5D42A8008F300AA160F /* AddContentMapView.swift */,
+				4BD9D5D62A80091B00AA160F /* CustomMarkerView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 				4BF7A0082A6CE9BC004F5C36 /* HomeViewController.swift */,
 				4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */,
 				4BDD0FDF2A6A20230065D5C1 /* DetailContentViewController.swift */,
+				4BD9D5D22A8008B700AA160F /* AddContentMapViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 				5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */,
 				B18C83742A7FC97500683F4D /* zfzfzz.swift in Sources */,
 				5458D50B2A7BBB5700C98C17 /* ChattingCell.swift in Sources */,
+				4BD9D5D32A8008B700AA160F /* AddContentMapViewController.swift in Sources */,
 				B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */,
 				5458D50F2A7BBB7C00C98C17 /* ChatListViewController.swift in Sources */,
 				B109F9202A605C5B002E870C /* HomeView.swift in Sources */,
@@ -484,8 +494,10 @@
 				4B46DB122A6D551100EA7903 /* HomeViewContentCell.swift in Sources */,
 				534F55252A603B1000A565F8 /* SceneDelegate.swift in Sources */,
 				B11477292A6909FF003AB9C7 /* User.swift in Sources */,
+				4BD9D5D72A80091B00AA160F /* CustomMarkerView.swift in Sources */,
 				5458D5112A7BBB9800C98C17 /* ChatList.swift in Sources */,
 				4BDD0FE02A6A20230065D5C1 /* DetailContentViewController.swift in Sources */,
+				4BD9D5D52A8008F300AA160F /* AddContentMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
