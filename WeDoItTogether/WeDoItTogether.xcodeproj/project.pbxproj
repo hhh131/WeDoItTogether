@@ -55,6 +55,7 @@
 		B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */; };
 		B18B47CE2A7AC903006EC979 /* UserDefaultsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */; };
 		B18B47D02A7AC98A006EC979 /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */; };
+		B18C83742A7FC97500683F4D /* zfzfzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18C83732A7FC97500683F4D /* zfzfzz.swift */; };
 		B1E5CB8A2A70B3F4004317EE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB892A70B3F4004317EE /* FirebaseAuth */; };
 		B1E5CB8C2A70B3F4004317EE /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8B2A70B3F4004317EE /* FirebaseDatabase */; };
 		B1E5CB8E2A70B3F4004317EE /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B1E5CB8D2A70B3F4004317EE /* FirebaseDatabaseSwift */; };
@@ -113,6 +114,7 @@
 		B18B47CA2A7AB898006EC979 /* MapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCollectionViewCell.swift; sourceTree = "<group>"; };
 		B18B47CD2A7AC903006EC979 /* UserDefaultsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsData.swift; sourceTree = "<group>"; };
 		B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
+		B18C83732A7FC97500683F4D /* zfzfzz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zfzfzz.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 				B109F91C2A605AAA002E870C /* Controller */,
 				53479FF72A699EDE00645844 /* Cell */,
 				B109F91B2A605AA1002E870C /* View */,
+				B18C83732A7FC97500683F4D /* zfzfzz.swift */,
 			);
 			path = WeDoItTogether;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				534F55272A603B1000A565F8 /* LoginViewController.swift in Sources */,
 				B18B47D02A7AC98A006EC979 /* CurrentLocation.swift in Sources */,
 				5480608A2A696B0C000DFC56 /* ForgetPasswordViewController.swift in Sources */,
+				B18C83742A7FC97500683F4D /* zfzfzz.swift in Sources */,
 				5458D50B2A7BBB5700C98C17 /* ChattingCell.swift in Sources */,
 				B101A1BD2A681CEF00B92ECF /* RegisterView.swift in Sources */,
 				5458D50F2A7BBB7C00C98C17 /* ChatListViewController.swift in Sources */,
