@@ -106,13 +106,21 @@ class AddContentView: UIView {
         return button
     }()
     
-//    lazy var markerButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setImage(UIImage(systemName: "handpoint.down.fill"), for: .normal)
-//        button.tintColor = .blue
-//
-//        return button
-//    }()
+    lazy var loactionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .boldSystemFont(ofSize: 30)
+        
+        return label
+    }()
+    
+    //    lazy var markerButton: UIButton = {
+    //        let button = UIButton(type: .system)
+    //        button.setImage(UIImage(systemName: "handpoint.down.fill"), for: .normal)
+    //        button.tintColor = .blue
+    //
+    //        return button
+    //    }()
     
     lazy var memoLabel: UILabel = {
         let label = UILabel()
@@ -151,8 +159,11 @@ class AddContentView: UIView {
         self.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        mapView.addSubview(compassButton)
-        compassButton.translatesAutoresizingMaskIntoConstraints = false
+        [compassButton, loactionLabel]
+            .forEach { item in
+                item.translatesAutoresizingMaskIntoConstraints = false
+                mapView.addSubview(item)
+            }
         
         [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, mapView, memoLabel, memoTextField, dateResultLabel]
             .forEach { item in
