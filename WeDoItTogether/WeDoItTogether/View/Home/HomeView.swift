@@ -15,8 +15,6 @@ class HomeView: UIView {
     
     weak var delegate: HomeViewDelegate?
     
-    var testModel = dataSource
-    
     lazy var collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()

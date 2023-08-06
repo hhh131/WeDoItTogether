@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21D3382A6A172F00352B29 /* HomeTestModel.swift */; };
+		4B21D3392A6A172F00352B29 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B21D3382A6A172F00352B29 /* Item.swift */; };
 		4B46DB102A6D463B00EA7903 /* AddContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */; };
 		4B46DB122A6D551100EA7903 /* HomeViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */; };
 		4BD9D5D32A8008B700AA160F /* AddContentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9D5D22A8008B700AA160F /* AddContentMapViewController.swift */; };
@@ -69,7 +69,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4B21D3382A6A172F00352B29 /* HomeTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTestModel.swift; sourceTree = "<group>"; };
+		4B21D3382A6A172F00352B29 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4B46DB0F2A6D463B00EA7903 /* AddContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentViewController.swift; sourceTree = "<group>"; };
 		4B46DB112A6D551100EA7903 /* HomeViewContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContentCell.swift; sourceTree = "<group>"; };
 		4BD9D5D22A8008B700AA160F /* AddContentMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentMapViewController.swift; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 				5458D5102A7BBB9800C98C17 /* ChatList.swift */,
 				B11477282A6909FF003AB9C7 /* User.swift */,
 				B18B47CF2A7AC98A006EC979 /* CurrentLocation.swift */,
-				4B21D3382A6A172F00352B29 /* HomeTestModel.swift */,
+				4B21D3382A6A172F00352B29 /* Item.swift */,
 				B18C83752A7FEBCF00683F4D /* UserNotification.swift */,
 			);
 			path = Model;
@@ -453,7 +453,7 @@
 				5458D50D2A7BBB7600C98C17 /* ChatListView.swift in Sources */,
 				B18B47CB2A7AB898006EC979 /* MapCollectionViewCell.swift in Sources */,
 				548060882A696AF0000DFC56 /* ForgetPasswordVIew.swift in Sources */,
-				4B21D3392A6A172F00352B29 /* HomeTestModel.swift in Sources */,
+				4B21D3392A6A172F00352B29 /* Item.swift in Sources */,
 				53A724F02A717BE70098A3B3 /* PasswordEditView.swift in Sources */,
 				4BDD0FDE2A6A1AB60065D5C1 /* DetailContentView.swift in Sources */,
 				534F55392A60713300A565F8 /* ProfileView.swift in Sources */,
