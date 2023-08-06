@@ -18,7 +18,6 @@ struct Item: Encodable, Identifiable {
     var alarmTime:Date? { // 1시간 전 알람 울릴 시간
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        formatter.timeZone = TimeZone(identifier: "UTC")
         guard let settingDate = formatter.date(from: date) else { return Date() }
         return Calendar.current.date(byAdding: .hour, value: -1, to: settingDate)
     }

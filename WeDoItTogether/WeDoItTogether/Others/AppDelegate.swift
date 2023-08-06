@@ -13,7 +13,7 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var userNotificationCenter: UNUserNotificationCenter?
+    var userNotificationCenter = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         
         let authrizationOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
-        userNotificationCenter?.requestAuthorization(completionHandler: { _, error in
+        userNotificationCenter.requestAuthorization(options: authrizationOptions, completionHandler: { _, error in
             if let error = error {
                 print("Error: notification authrization request \(error.localizedDescription)")
             }
