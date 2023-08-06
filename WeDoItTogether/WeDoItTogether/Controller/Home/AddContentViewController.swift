@@ -2,6 +2,8 @@ import UIKit
 import MapKit
 import Firebase
 import CoreLocation
+import UserNotifications
+
 
 protocol AddContentDelegate: AnyObject {
     func didSaveItem(_ item: Item)
@@ -20,6 +22,8 @@ class AddContentViewController: UIViewController, MKMapViewDelegate, CLLocationM
     var isMapMoving = false
     var currentCenterPoint: CLLocationCoordinate2D?
     var currentCentAddress: String = ""
+    
+    let userNotificationCenter = UNUserNotificationCenter.current()
     
     override func loadView() {
         self.view = addContentView
@@ -148,6 +152,9 @@ class AddContentViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         delegate?.didSaveItem(newItem)
         
+        //알림 추가
+        self.userNotificationCenter.addNotificationRequest(item: newItem)
+
         self.navigationController?.popViewController(animated: true)
     }
     
