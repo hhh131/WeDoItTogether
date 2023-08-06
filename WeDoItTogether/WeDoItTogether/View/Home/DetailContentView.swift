@@ -102,6 +102,14 @@ class DetailContentView: UIView {
         return collectionView
     }()
     
+    lazy var deleteButton: UIButton = {
+        let button = UIButton(configuration: .tinted())
+        button.setTitle("삭제하기", for: .normal)
+        button.isEnabled = false
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -121,7 +129,7 @@ class DetailContentView: UIView {
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        [detailContentView, collectionView].forEach { item in
+        [detailContentView, collectionView, deleteButton].forEach { item in
             contentView.addSubview(item)
             item.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -164,8 +172,12 @@ class DetailContentView: UIView {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
             
+            deleteButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: padding),
+            deleteButton.leadingAnchor.constraint(equalTo: detailContentView.leadingAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: detailContentView.trailingAnchor),
+            deleteButton.heightAnchor.constraint(equalToConstant: 50),
+            deleteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
         
         NSLayoutConstraint.activate([

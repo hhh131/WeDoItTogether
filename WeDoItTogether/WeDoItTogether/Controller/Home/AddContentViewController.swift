@@ -20,7 +20,6 @@ class AddContentViewController: UIViewController {
     
     var user = UserDefaultsData.shared.getUser()
     let addContentView = AddContentView()
-    var testModel = dataSource
     
     let userNotificationCenter = UNUserNotificationCenter.current()
     
@@ -58,11 +57,15 @@ extension AddContentViewController {
         let memoText = addContentView.memoTextField.text ?? ""
         let dateString = addContentView.dateResultLabel.text ?? ""
         
-        let newItem = Item(title: titleText, date: dateString, location: "", memo: memoText, members: [self.user?.name ?? ""], emails: [self.user?.email ?? ""])
+        guard let user = user else {
+            return
+        }
+        
+        let newItem = Item(title: titleText, date: dateString, location: "", memo: memoText, members: [user.name], emails: [user.email], creator: user.email)
         let newItemDictionary = newItem.asDictionary()
         
         let database = Database.database().reference()
-        let newItemRef = database.child("items").childByAutoId()
+        let newItemRef = database.child("items").child("\(newItem.id)")
         
         newItemRef.setValue(newItemDictionary)
         
