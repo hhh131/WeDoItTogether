@@ -74,7 +74,7 @@ class AddContentView: UIView {
     
     lazy var locationLabel: UILabel = {
         let label = UILabel()
-        label.text = "위치 설정"
+        label.text = "약속장소 설정"
         label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 30)
         
@@ -83,18 +83,18 @@ class AddContentView: UIView {
     
     lazy var searchLocationButton: UIButton = {
         let button = UIButton(configuration: .tinted())
-        button.setTitle("장소 선택", for: .normal)
+        button.setTitle(isLocationSeletced ? "장소 재설정" : "장소 설정", for: .normal)
         
         return button
     }()
     
-    //    lazy var markerButton: UIButton = {
-    //        let button = UIButton(type: .system)
-    //        button.setImage(UIImage(systemName: "handpoint.down.fill"), for: .normal)
-    //        button.tintColor = .blue
-    //
-    //        return button
-    //    }()
+    lazy var locationResultLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .boldSystemFont(ofSize: 15)
+        
+        return label
+    }()
     
     lazy var memoLabel: UILabel = {
         let label = UILabel()
@@ -133,7 +133,7 @@ class AddContentView: UIView {
         self.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, searchLocationButton, memoLabel, memoTextField, dateResultLabel]
+        [titleLabel, titleTextField, redTitleLabel, dateLabel, datePicker, locationLabel, searchLocationButton, locationResultLabel, memoLabel, memoTextField, dateResultLabel]
             .forEach { item in
                 item.translatesAutoresizingMaskIntoConstraints = false
                 scrollView.addSubview(item)
@@ -194,12 +194,17 @@ class AddContentView: UIView {
             searchLocationButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             searchLocationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             searchLocationButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            locationResultLabel.topAnchor.constraint(equalTo: searchLocationButton.bottomAnchor, constant: padding + 5 ),
+            locationResultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            locationResultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            locationResultLabel.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         
         
         NSLayoutConstraint.activate([
-            memoLabel.topAnchor.constraint(equalTo: searchLocationButton.bottomAnchor, constant: padding + 5),
+            memoLabel.topAnchor.constraint(equalTo: locationResultLabel.bottomAnchor, constant: padding + 5),
             memoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             memoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             memoLabel.heightAnchor.constraint(equalToConstant: 50),

@@ -1,4 +1,3 @@
-
 //  AddContentMapViewController.swift
 //  WeDoItTogether
 //
@@ -7,29 +6,63 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
-class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class AddContentMapViewController: UIViewController, MKMapViewDelegate, UISearchControllerDelegate {
     
     let addContentMapView = AddContentMapView()
-    let locationManager = CLLocationManager()
+    let customMarkerView = CustomMarkerView()
+    let userLocation = UserDefaultsData.shared.getLocation()
+    let searchCompleter = MKLocalSearchCompleter()
+    
     var centerAnnotation: MKPointAnnotation!
     var isMapMoving = false
     var currentCenterPoint: CLLocationCoordinate2D?
     var currentCentAddress: String = ""
-    let userLocation = UserDefaultsData.shared.getLocation()
+    var searchController: UISearchController!
+    var searchResults: Set<String> = []
     
     override func loadView() {
         self.view = addContentMapView
-        setLocationMapView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addContentMapView.mapView.delegate = self
+        setLocationMapView()
+        setupSearchController()
+        setupTableView()
+        searchCompleter.delegate = self
+        
+    }
+    
+    func setupSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "주소를 입력해주세요."
+        searchController.searchResultsUpdater = self
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.title = "장소 선택"
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.delegate = self
+    }
+    
+    func setupTableView() {
+        addContentMapView.tableView.isHidden = true
+        addContentMapView.tableView.delegate = self
+        addContentMapView.tableView.dataSource = self
+    }
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        addContentMapView.mapView.isHidden = true
+        addContentMapView.tableView.isHidden = false
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        addContentMapView.mapView.isHidden = false
+        addContentMapView.tableView.isHidden = true
     }
     
     func setLocationMapView() {
+        addContentMapView.mapView.delegate = self
         addContentMapView.mapView.showsUserLocation = true
         
         let center = CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude)
@@ -42,12 +75,12 @@ class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocati
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            if annotation === centerAnnotation {
-                let annotationView = CustomMarkerView(annotation: annotation, reuseIdentifier: "CustomMarkerView")
-                return annotationView
-            }
-            return nil
+        if annotation === centerAnnotation {
+            let annotationView = CustomMarkerView(annotation: annotation, reuseIdentifier: "CustomMarkerView")
+            return annotationView
         }
+        return nil
+    }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         centerAnnotation.coordinate = mapView.centerCoordinate
@@ -55,7 +88,6 @@ class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocati
     }
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        
         if !isMapMoving {
             UIView.animate(withDuration: 0.3) {
                 self.centerAnnotation.coordinate.latitude += 0.0005
@@ -70,6 +102,7 @@ class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocati
         if isMapMoving {
             UIView.animate(withDuration: 0.3) {
                 self.centerAnnotation.coordinate.latitude -= 0.0005
+                
             }
             isMapMoving = false
         }
@@ -77,6 +110,7 @@ class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocati
         if let currentCenterPoint = currentCenterPoint {
             convertLocationToAddress(currentCenterPoint)
         }
+        
     }
     
     func convertLocationToAddress(_ coordinate: CLLocationCoordinate2D) {
@@ -96,19 +130,89 @@ class AddContentMapViewController: UIViewController, MKMapViewDelegate, CLLocati
                 
                 return
             }
-            // 자세한 도로표시정보 및 지역별 예외처리 나중에 더 수정할 예정
+
             var currentCentAddress = [placemark.locality, placemark.name]
                 .compactMap { $0 }
                 .joined(separator: " ")
             
             if placemark.administrativeArea != "서울특별시" {
-                currentCentAddress = "\(placemark.administrativeArea ?? "") " + currentCentAddress
+                currentCentAddress = "\(placemark.administrativeArea ?? "")  \(placemark.subAdministrativeArea ?? "")" + currentCentAddress
             }
             
-            
-            print("Center Coordinate: \(coordinate.latitude), \(coordinate.longitude)")
-            print("Address: \(currentCentAddress)")
             self.addContentMapView.currentLocationLabel.text = currentCentAddress
         }
+    }
+    
+}
+
+extension AddContentMapViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            searchResults.removeAll()
+            addContentMapView.tableView.reloadData()
+            return
+        }
+        
+        searchCompleter.queryFragment = searchText
+    }
+    
+    
+    func geocodeAndCenterMap(for selectedLocation: String) {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = selectedLocation
+        
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            } else {
+                if let mapItem = response?.mapItems.first {
+                    let location = mapItem.placemark.coordinate
+                    
+                    let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                    self.addContentMapView.mapView.setRegion(region, animated: true)
+                    
+                    self.currentCenterPoint = location
+                    self.currentCentAddress = selectedLocation
+                    self.addContentMapView.currentLocationLabel.text = selectedLocation
+                }
+            }
+            
+            self.searchController.dismiss(animated: true) {
+                self.addContentMapView.mapView.isHidden = false
+                self.addContentMapView.tableView.isHidden = true
+            }
+        }
+    }
+}
+
+extension AddContentMapViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = searchResults.sorted()[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedLocation = searchResults.sorted()[indexPath.row]
+        geocodeAndCenterMap(for: selectedLocation)
+    }
+    
+}
+
+extension AddContentMapViewController: MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = Set(completer.results.map { $0.title })
+        addContentMapView.tableView.reloadData()
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print("\(error.localizedDescription)")
     }
 }
