@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, AddContentDelegate {
     
     @objc private func addButtonTapped() {
         let addContentViewController = AddContentViewController()
+        addContentViewController.hidesBottomBarWhenPushed = true
         addContentViewController.delegate = self
         navigationController?.pushViewController(addContentViewController, animated: true)
     }
