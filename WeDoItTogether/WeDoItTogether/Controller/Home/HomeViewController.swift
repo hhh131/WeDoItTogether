@@ -11,7 +11,7 @@ import Firebase
 class HomeViewController: UIViewController, AddContentDelegate {
     
     let homeView = HomeView()
-    var testModel = dataSource
+    var items: [Item] = []
     
     var user = UserDefaultsData.shared.getUser()
     
@@ -23,72 +23,80 @@ class HomeViewController: UIViewController, AddContentDelegate {
         self.navigationItem.rightBarButtonItem = addButton
     }
     
+    @objc private func addButtonTapped() {
+        let addContentViewController = AddContentViewController()
+        addContentViewController.hidesBottomBarWhenPushed = true
+        addContentViewController.delegate = self
+        navigationController?.pushViewController(addContentViewController, animated: true)
+    }
+    
     override func loadView() {
         super.loadView()
         self.view = homeView
-        homeView.collectionView.delegate = self
-        homeView.collectionView.dataSource = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getDatabaseInfo()
+        configureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        getDatabaseInfo()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    @objc private func addButtonTapped() {
-        let addContentViewController = AddContentViewController()
-        addContentViewController.delegate = self
-        navigationController?.pushViewController(addContentViewController, animated: true)
+    private func configureCollectionView() {
+        homeView.collectionView.delegate = self
+        homeView.collectionView.dataSource = self
     }
     
-    @objc private func anyCellClicked() {
-        let detailViewController = DetailContentViewController()
-        detailViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(detailViewController, animated: true)
-    }
-    
-    @objc private func getDatabaseInfo() {
+    private func getDatabaseInfo() {
         let ref = Database.database().reference()
         let itemsRef = ref.child("items")
         
+        Loading.showLoading()
+        items.removeAll()
         itemsRef.observeSingleEvent(of: .value) { (snapshot) in
-            if let items = snapshot.children.allObjects as? [DataSnapshot] {
-                for itemSnapshot in items {
-                    if let itemInfo = itemSnapshot.value as? [String: Any],
-                       let title = itemInfo["title"] as? String,
-                       let location = itemInfo["location"] as? String,
-                       let memo = itemInfo["memo"] as? String,
-                       let date = itemInfo["date"] as? String,
-                       let members = itemInfo["members"] as? [String],
-                       let emails = itemInfo["emails"] as? [String] {
-                        
-//                            if emails.contains(self.user?.email ?? "") {
-                                let item = Item(title: title, date: date, location: location, memo: memo, members: members, emails: emails)
-                                self.testModel.append(item)
-//                            }
-                    }
+            guard let items = snapshot.children.allObjects as? [DataSnapshot] else {
+                Loading.hideLoading()
+                return
+            }
+            
+            for itemSnapshot in items {
+                guard let itemInfo = itemSnapshot.value as? [String: Any],
+                      let title = itemInfo["title"] as? String,
+                      let location = itemInfo["location"] as? String,
+                      let memo = itemInfo["memo"] as? String,
+                      let date = itemInfo["date"] as? String,
+                      let members = itemInfo["members"] as? [String],
+                      let emails = itemInfo["emails"] as? [String],
+                      let creator = itemInfo["creator"] as? String else {
+                    Loading.hideLoading()
+                    return
                 }
                 
-                self.homeView.collectionView.reloadData()
+                if emails.contains(self.user?.email ?? "") {
+                    let item = Item(title: title, date: date, location: location, memo: memo, members: members, emails: emails, creator: creator)
+                    self.items.append(item)
+                }
             }
+            
+            self.homeView.collectionView.reloadData()
+            Loading.hideLoading()
+            
         }
     }
     
     func didSaveItem(_ item: Item) {
-        testModel.append(item)
+        items.append(item)
         homeView.collectionView.reloadData()
     }
-    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -103,13 +111,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return testModel.count
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! HomeViewContentCell
         
-        let item = testModel[indexPath.item]
+        let item = items[indexPath.item]
         
         cell.titleLabel.text = item.title
         cell.locationLabel.text = item.location
@@ -129,7 +137,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailContentViewController = DetailContentViewController()
-        detailContentViewController.item = testModel[indexPath.item]
+        detailContentViewController.item = items[indexPath.item]
         self.navigationController?.pushViewController(detailContentViewController, animated: true)
     }
 }

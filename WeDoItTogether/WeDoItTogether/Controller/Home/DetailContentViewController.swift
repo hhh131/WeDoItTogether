@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 class DetailContentViewController: UIViewController, MKMapViewDelegate {
     
@@ -23,9 +24,10 @@ class DetailContentViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        barButton()
         updateUILabel()
         configureTableView()
+        setButtons()
+        barButton()
     }
     
     func updateUILabel() {
@@ -36,23 +38,53 @@ class DetailContentViewController: UIViewController, MKMapViewDelegate {
         detailContentView.membersLabel.text = membersString
     }
     
-    func barButton() {
-        let joinButton = UIBarButtonItem(title: "약속 참가", style: .plain, target: self, action: #selector(joinButtonClicked))
-        navigationItem.rightBarButtonItem = joinButton
-    }
-    
     private func configureTableView() {
         detailContentView.collectionView.register(MapCollectionViewCell.self, forCellWithReuseIdentifier: MapCollectionViewCell.identifier)
         detailContentView.collectionView.dataSource = self
         detailContentView.collectionView.delegate = self
     }
     
+    private func setButtons() {
+        guard let user = user else { return }
+        guard item?.creator == user.email else {
+            return
+        }
+        
+        detailContentView.deleteButton.isEnabled = true
+        detailContentView.deleteButton.addTarget(self, action: #selector(touchUpDeleteButton), for: .touchUpInside)
+    }
+    
+    @objc func touchUpDeleteButton() {
+        self.showAlert(message: "약속을 삭제하시겠습니까?", isCancelButton: true) {
+            self.deleteItem()
+        }
+    }
+    
+    private func deleteItem() {
+        guard let item = item else {
+            return
+        }
+        
+        let ref = Database.database().reference()
+        let itemRefToDelete = ref.child("items").child(item.id.uuidString)
+
+        itemRefToDelete.removeValue { error, _ in
+            if let error = error {
+                print("Error deleting item: \(error.localizedDescription)")
+            } else {
+                print("Item deleted successfully.")
+            }
+        }
+    }
+    
+    func barButton() {
+        let joinButton = UIBarButtonItem(title: "약속 참가", style: .plain, target: self, action: #selector(joinButtonClicked))
+        navigationItem.rightBarButtonItem = joinButton
+    }
     
     @objc private func joinButtonClicked() {
         print("hello world")
     }
-    
-    
 }
 
 //MARK: - 컬렉션뷰 관련

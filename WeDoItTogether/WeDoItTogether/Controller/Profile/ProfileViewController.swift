@@ -103,6 +103,7 @@ extension ProfileViewController {
             do {
               try Auth.auth().signOut()
                 UserDefaultsData.shared.removeAll()
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootView(UINavigationController(rootViewController: LoginViewController()), animated: true)
             } catch let signOutError as NSError {
               print ("Error signing out: %@", signOutError)
