@@ -83,7 +83,7 @@ class AddContentView: UIView {
     
     lazy var searchLocationButton: UIButton = {
         let button = UIButton(configuration: .tinted())
-        button.setTitle(isLocationSeletced ? "장소 재설정" : "장소 설정", for: .normal)
+        button.setTitle("장소 설정", for: .normal)
         
         return button
     }()
