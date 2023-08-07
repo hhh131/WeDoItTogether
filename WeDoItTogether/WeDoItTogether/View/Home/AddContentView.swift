@@ -11,14 +11,6 @@ import MapKit
 
 class AddContentView: UIView {
     
-    var testModel = dataSource
-    
-    var titleText: String = ""
-    var locationText: String = ""
-    var memoText: String = ""
-    var dateString: String = ""
-    var isLocationSeletced: Bool = false
-    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true

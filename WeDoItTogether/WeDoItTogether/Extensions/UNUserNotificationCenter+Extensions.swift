@@ -12,7 +12,7 @@ extension UNUserNotificationCenter {
     func addNotificationRequest(item:Item){
         //알림 내용 구성
         let content = UNMutableNotificationContent()
-        content.title = "\(item.title) 약속이 얼마 남지 않았습니다."
+        content.title = "\(item.title) 약속 알림"
         content.body = "\(item.title)약속까지 한시간 남았습니다. 얼른 \(item.location)으로 이동하세요~"
         content.sound = .default
         content.badge = 1
