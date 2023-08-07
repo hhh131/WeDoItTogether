@@ -16,7 +16,7 @@ class ChattingView: UIView {
         addViews()
         setLayoutConstraints()
         self.backgroundColor = .white
-        collectionView.register(ChattingCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //collectionView.register(ChattingCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +25,7 @@ class ChattingView: UIView {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         

@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class ChattingCell: UICollectionViewCell{
+class MyChattingCell: UICollectionViewCell{
     //부모 메서드 초기화 시켜줘야 한다.
     
     
@@ -21,15 +21,6 @@ class ChattingCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
-        imageView.contentMode = .scaleAspectFit
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
-        return imageView
-    }()
     
 
     lazy var contentLabel: UILabel = {
@@ -50,7 +41,7 @@ class ChattingCell: UICollectionViewCell{
     }()
     
     func addViews() {
-        [imageView, contentLabel, dateLabel].forEach { item in
+        [contentLabel, dateLabel].forEach { item in
             item.translatesAutoresizingMaskIntoConstraints = false
             addSubview(item)
         }
@@ -59,14 +50,10 @@ class ChattingCell: UICollectionViewCell{
     func setLayoutConstraints(){
         let safeArea = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 40),
-            imageView.heightAnchor.constraint(equalToConstant: 40),
-            imageView.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
-            imageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant:  20),
             
-            contentLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
-            contentLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
-           
+            contentLabel.topAnchor.constraint(equalTo: safeArea.topAnchor,constant: 10),
+            contentLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor,constant: -10),
+            contentLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,constant: 10),
             
             dateLabel.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10)
