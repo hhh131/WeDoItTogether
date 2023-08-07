@@ -8,9 +8,10 @@
 import Foundation
 
 struct ChatList: Codable  {
-    let name: String
-    let content: String
+    var name: String
+    var content: String
     var date: Date = Date.now
+    
 }
 
 extension ChatList {

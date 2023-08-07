@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Firebase
+
 private let reuseIdentifier = "ChatListCell"
 class ChatListViewController: UIViewController {
+ 
+    
     let chatListView = ChatListView()
     var mockData = ChatList.mockData
    
@@ -25,8 +29,6 @@ class ChatListViewController: UIViewController {
         super.viewDidLoad()
         chatListView.collectionView.dataSource = self
         chatListView.collectionView.delegate = self
-        
-        
     }
 }
 
@@ -49,12 +51,10 @@ extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let nav = UINavigationController(rootViewController: ChatListViewController())
-//        nav.modalPresentationStyle = .overFullScreen
-//        self.present(nav, animated: true)
+
         let vc = ChattingViewController()
         vc.hidesBottomBarWhenPushed = true
-   
+        vc.chatRoomUid = String(indexPath.row)
         navigationController?.pushViewController(vc, animated: true)
      
     }
